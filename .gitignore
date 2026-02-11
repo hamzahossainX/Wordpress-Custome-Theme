@@ -1,0 +1,26 @@
+# WordPress Core files (Do not upload)
+wp-admin/
+wp-includes/
+*.php
+!index.php
+license.txt
+readme.html
+xmlrpc.php
+
+# Configuration files (SECURITY RISK)
+wp-config.php
+.htaccess
+
+# Uploads and Cache
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+
+# Ignore all themes and plugins first
+wp-content/themes/*
+wp-content/plugins/*
+
+# Whitelist ONLY my custom work (আপলোড করার অনুমতি)
+!wp-content/themes/antigravity/
+!wp-content/plugins/amira-core/
+!PROJECT_MANIFEST.md
