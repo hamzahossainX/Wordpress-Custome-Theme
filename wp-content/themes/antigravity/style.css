@@ -429,8 +429,9 @@ article:last-child {
 }
 
 
+
 /* ========================================
-   HERO SLIDER STYLES - Full-Width Background
+   HERO SLIDER STYLES - Full-Width Background (WoodMart Professional)
 ======================================== */
 .hero-slider-section {
     position: relative;
@@ -449,9 +450,10 @@ article:last-child {
     background-position: center center;
     background-repeat: no-repeat;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
     height: 600px;
 }
 
@@ -466,31 +468,43 @@ article:last-child {
     z-index: 1;
 }
 
-/* Slide Content */
+/* Slide Content Container */
 .slide-content {
     position: relative;
     z-index: 2;
-    max-width: 700px;
+    width: 100%;
+    max-width: 800px;
     color: #FFFFFF;
 }
 
+/* Inner Content Wrapper for Perfect Centering */
+.hero-content-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Headline Styling */
 .slide-headline {
-    font-size: 72px;
+    font-size: 60px;
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.2;
     color: #FFFFFF;
     margin-bottom: 25px;
     font-family: 'Lato', sans-serif;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
 }
 
+/* Description Text */
 .slide-text {
     font-size: 18px;
     line-height: 1.8;
     color: #FFFFFF;
     margin-bottom: 35px;
     font-weight: 300;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .slide-text p {
@@ -498,13 +512,14 @@ article:last-child {
     color: #FFFFFF;
 }
 
+/* Button Styling (WoodMart Style: White BG, Black Text) */
 .slide-button {
     display: inline-block;
-    padding: 18px 45px;
-    background-color: #000000;
-    color: #FFFFFF;
+    padding: 15px 40px;
+    background-color: #FFFFFF;
+    color: #000000;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     border: none;
@@ -515,10 +530,10 @@ article:last-child {
 }
 
 .slide-button:hover {
-    background-color: #FFFFFF;
-    color: #000000;
+    background-color: #000000;
+    color: #FFFFFF;
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* ========================================
@@ -560,29 +575,39 @@ article:last-child {
 }
 
 /* ========================================
-   SWIPER NAVIGATION & PAGINATION
+   SWIPER NAVIGATION & PAGINATION (WoodMart Professional)
 ======================================== */
 
-/* Navigation Arrows */
+/* Navigation Arrows - Professional Style */
 .swiper-button-prev,
 .swiper-button-next {
     color: #FFFFFF;
     width: 50px;
     height: 50px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     transition: all 0.3s ease;
+    opacity: 0;
+}
+
+/* Show arrows on hover */
+.hero-slider-section:hover .swiper-button-prev,
+.hero-slider-section:hover .swiper-button-next {
+    opacity: 1;
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
     transform: scale(1.1);
 }
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
     font-size: 20px;
+    font-weight: 700;
 }
 
 /* Pagination Dots */
@@ -619,11 +644,17 @@ article:last-child {
     }
 
     .slide-headline {
-        font-size: 56px;
+        font-size: 48px;
     }
 
     .slide-text {
         font-size: 16px;
+    }
+
+    /* Show arrows on tablet */
+    .swiper-button-prev,
+    .swiper-button-next {
+        opacity: 1;
     }
 }
 
@@ -638,12 +669,11 @@ article:last-child {
     }
 
     .slide-content {
-        text-align: center;
         padding: 0 20px;
     }
 
     .slide-headline {
-        font-size: 36px;
+        font-size: 32px;
     }
 
     .slide-text {
@@ -651,7 +681,7 @@ article:last-child {
     }
 
     .slide-button {
-        padding: 15px 35px;
+        padding: 12px 30px;
         font-size: 13px;
     }
 
@@ -659,6 +689,7 @@ article:last-child {
     .swiper-button-next {
         width: 40px;
         height: 40px;
+        opacity: 1;
     }
 
     .swiper-button-prev::after,
