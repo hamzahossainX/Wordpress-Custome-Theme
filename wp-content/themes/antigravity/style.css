@@ -1020,3 +1020,177 @@ article:last-child {
         justify-content: center;
     }
 }
+
+/* ========================================
+   CATEGORY PROMO GRID SECTION (WoodMart Style)
+======================================== */
+
+.category-grid-section {
+    padding: 60px 0;
+    background-color: #FFFFFF;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Individual Category Banner Item */
+.category-banner-item {
+    position: relative;
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+/* Background Image Scale Effect on Hover */
+.category-banner-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease-in-out;
+    z-index: 1;
+}
+
+.category-banner-item:hover::before {
+    transform: scale(1.1);
+}
+
+/* Gradient Overlay for Text Readability */
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    z-index: 2;
+}
+
+/* Banner Content Container */
+.banner-content {
+    position: relative;
+    z-index: 3;
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: #FFFFFF;
+}
+
+/* Subtitle (Small Text Above Title) */
+.banner-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 10px 0;
+}
+
+/* Main Title */
+.banner-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+}
+
+/* Read More Button */
+.banner-button {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    background-color: transparent;
+    border: 2px solid #FFFFFF;
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Button Slide Up & Fade In on Hover */
+.category-banner-item:hover .banner-button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Button Hover Effect */
+.banner-button:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+/* ========================================
+   CATEGORY GRID RESPONSIVE DESIGN
+======================================== */
+
+/* Tablet (768px - 1023px): 2 Columns */
+@media screen and (max-width: 1023px) {
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .category-banner-item {
+        height: 250px;
+    }
+    
+    .banner-title {
+        font-size: 20px;
+    }
+}
+
+/* Mobile (< 768px): 1 Column */
+@media screen and (max-width: 767px) {
+    .category-grid-section {
+        padding: 40px 0;
+    }
+    
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .category-banner-item {
+        height: 220px;
+    }
+    
+    .banner-content {
+        padding: 20px;
+    }
+    
+    .banner-subtitle {
+        font-size: 11px;
+    }
+    
+    .banner-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+    
+    /* Show button by default on mobile (no hover) */
+    .banner-button {
+        opacity: 1;
+        transform: translateY(0);
+        font-size: 12px;
+        padding: 10px 24px;
+    }
+}
