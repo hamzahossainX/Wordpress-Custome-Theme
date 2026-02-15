@@ -41,6 +41,24 @@ a:hover {
 }
 
 /* ========================================
+   HOMEPAGE TITLE CLEANUP
+   Hide default WordPress titles on homepage
+======================================== */
+.home .entry-title,
+.home .post-title,
+.home .page-title,
+.home h1.entry-title,
+.home article h1 {
+    display: none !important;
+}
+
+/* Hide WordPress default content wrapper titles on homepage */
+.home .entry-header {
+    display: none !important;
+}
+
+
+/* ========================================
    HEADER STYLES - WoodMart Minimalism Clone
    Perfect Center Architecture
 ======================================== */
@@ -484,6 +502,8 @@ article:last-child {
     align-items: center;
     justify-content: center;
     text-align: center;
+    z-index: 10;
+    position: relative;
 }
 
 /* Headline Styling */
@@ -575,60 +595,58 @@ article:last-child {
 }
 
 /* ========================================
-   SWIPER NAVIGATION & PAGINATION (WoodMart Professional)
+   SWIPER PAGINATION (WoodMart Professional Style)
 ======================================== */
 
-/* Navigation Arrows - Professional Style */
-.swiper-button-prev,
-.swiper-button-next {
-    color: #FFFFFF;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    opacity: 0;
+/* Pagination Container */
+.swiper-pagination {
+    bottom: 30px !important;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Show arrows on hover */
-.hero-slider-section:hover .swiper-button-prev,
-.hero-slider-section:hover .swiper-button-next {
+/* Pagination Bullets (Dots) */
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
     opacity: 1;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.8);
+/* Hover Effect */
+.swiper-pagination-bullet:hover {
+    background-color: rgba(0, 0, 0, 0.5);
     transform: scale(1.1);
 }
 
-.swiper-button-prev::after,
-.swiper-button-next::after {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-/* Pagination Dots */
-.swiper-pagination {
-    bottom: 30px !important;
-}
-
-.swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background-color: #FFFFFF;
-    opacity: 0.5;
-    transition: all 0.3s ease;
-}
-
+/* Active Bullet (WoodMart Style: Expands to Line) */
 .swiper-pagination-bullet-active {
-    opacity: 1;
-    background-color: #FFFFFF;
-    width: 30px;
-    border-radius: 6px;
+    background-color: #000000;
+    width: 28px;
+    border-radius: 5px;
 }
+
+/* Dynamic Bullets - Scale Effect */
+.swiper-pagination-bullet-active-main {
+    background-color: #000000;
+}
+
+.swiper-pagination-bullet-active-prev,
+.swiper-pagination-bullet-active-next {
+    transform: scale(0.85);
+}
+
+.swiper-pagination-bullet-active-prev-prev,
+.swiper-pagination-bullet-active-next-next {
+    transform: scale(0.7);
+}
+
 
 /* ========================================
    HERO SLIDER RESPONSIVE DESIGN
@@ -649,12 +667,6 @@ article:last-child {
 
     .slide-text {
         font-size: 16px;
-    }
-
-    /* Show arrows on tablet */
-    .swiper-button-prev,
-    .swiper-button-next {
-        opacity: 1;
     }
 }
 
@@ -684,16 +696,327 @@ article:last-child {
         padding: 12px 30px;
         font-size: 13px;
     }
+}
 
-    .swiper-button-prev,
-    .swiper-button-next {
-        width: 40px;
-        height: 40px;
-        opacity: 1;
+/* ========================================
+   MOBILE RESPONSIVE DESIGN (< 768px)
+======================================== */
+@media screen and (max-width: 767px) {
+
+    /* ========== HEADER & NAVIGATION ========== */
+
+    /* Hide desktop navigation */
+    .header-left {
+        display: none;
     }
 
-    .swiper-button-prev::after,
-    .swiper-button-next::after {
+    /* Hide desktop user tools */
+    .header-right {
+        display: none;
+    }
+
+    /* Adjust header container */
+    .header-container {
+        padding: 15px 20px;
+        justify-content: center;
+    }
+
+    /* Center logo on mobile */
+    .header-center {
+        margin: 0;
+    }
+
+    /* Mobile Menu Toggle (Hamburger Icon) */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 22px;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+    }
+
+    .mobile-menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #000000;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+
+    /* Hamburger animation when menu is open */
+    .menu-open .mobile-menu-toggle span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .menu-open .mobile-menu-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-open .mobile-menu-toggle span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    /* Mobile Navigation Overlay */
+    .menu-open .header-left {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #FFFFFF;
+        z-index: 1000;
+        padding-top: 80px;
+        overflow-y: auto;
+    }
+
+    .menu-open .primary-menu {
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+    }
+
+    .menu-open .primary-menu li {
+        border-bottom: 1px solid #ECECEC;
+    }
+
+    .menu-open .primary-menu a {
+        padding: 20px;
         font-size: 16px;
+        display: block;
+    }
+
+    /* Prevent body scroll when menu is open */
+    .menu-open {
+        overflow: hidden;
+    }
+
+    /* ========== HERO SLIDER MOBILE OPTIMIZATION ========== */
+
+    .hero-slider-section {
+        height: 400px !important;
+        min-height: 400px !important;
+    }
+
+    .swiper-slide {
+        height: 400px !important;
+    }
+
+    .slide-content {
+        padding: 0 20px;
+    }
+
+    /* Reduce title size for mobile */
+    .slide-headline {
+        font-size: 28px !important;
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+
+    .slide-text {
+        font-size: 14px !important;
+        margin-bottom: 20px;
+    }
+
+    .slide-button {
+        padding: 12px 30px !important;
+        font-size: 12px !important;
+    }
+
+    /* Pagination dots adjustment */
+    .swiper-pagination {
+        bottom: 20px !important;
+    }
+
+    .swiper-pagination-bullet {
+        width: 6px !important;
+        height: 6px !important;
+        margin: 0 4px !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        width: 18px !important;
+    }
+
+    /* ========== FOOTER ========== */
+
+    .footer-container {
+        padding: 0 20px;
+    }
+
+    .footer-content {
+        font-size: 12px;
+    }
+}
+
+/* Hide mobile toggle on desktop */
+@media screen and (min-width: 768px) {
+    .mobile-menu-toggle {
+        display: none;
+    }
+}
+/* ========================================
+   TABLET RESPONSIVE DESIGN (768px - 1024px)
+======================================== */
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    
+    /* ========== HEADER OPTIMIZATION ========== */
+    
+    .site-header {
+        padding: 10px 20px;
+    }
+    
+    /* Reduce header container padding */
+    .header-container {
+        padding: 10px 20px;
+    }
+    
+    /* Reduce menu font size to prevent overflow */
+    .primary-menu a {
+        font-size: 12px;
+        letter-spacing: 0.3px;
+    }
+    
+    .primary-menu {
+        gap: 20px;
+    }
+    
+    /* Hide login text, keep icon only */
+    .tool-text {
+        display: none;
+    }
+    
+    /* Adjust logo size */
+    .logo-text {
+        font-size: 20px;
+    }
+    
+    .logo-icon {
+        font-size: 20px;
+    }
+    
+    /* ========== HERO SLIDER TABLET OPTIMIZATION ========== */
+    
+    .hero-slider-section {
+        height: 500px;
+        min-height: 500px;
+    }
+    
+    .swiper-slide {
+        height: 500px;
+    }
+    
+    .slide-headline {
+        font-size: 40px;
+    }
+    
+    .slide-text {
+        font-size: 16px;
+    }
+    
+    .slide-button {
+        padding: 15px 35px;
+        font-size: 13px;
+    }
+}
+
+/* ========================================
+   TABLET WITH MOBILE MENU (< 1024px)
+   Switch to hamburger menu earlier for iPads
+======================================== */
+@media screen and (max-width: 1023px) {
+    
+    /* Hide desktop navigation */
+    .header-left {
+        display: none;
+    }
+    
+    /* Hide desktop user tools */
+    .header-right {
+        display: none;
+    }
+    
+    /* Show mobile toggle */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 22px;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+    }
+    
+    .mobile-menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #000000;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+    }
+    
+    /* Hamburger animation when menu is open */
+    .menu-open .mobile-menu-toggle span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+    
+    .menu-open .mobile-menu-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-open .mobile-menu-toggle span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+    /* Mobile Navigation Overlay */
+    .menu-open .header-left {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #FFFFFF;
+        z-index: 1000;
+        padding-top: 80px;
+        overflow-y: auto;
+    }
+    
+    .menu-open .primary-menu {
+        flex-direction: column;
+        gap: 0;
+        text-align: center;
+    }
+    
+    .menu-open .primary-menu li {
+        border-bottom: 1px solid #ECECEC;
+    }
+    
+    .menu-open .primary-menu a {
+        padding: 20px;
+        font-size: 18px;
+        display: block;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    .menu-open {
+        overflow: hidden;
+    }
+    
+    /* Center logo on tablet */
+    .header-container {
+        justify-content: center;
     }
 }
