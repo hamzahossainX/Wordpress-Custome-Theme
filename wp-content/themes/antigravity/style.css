@@ -428,47 +428,77 @@ article:last-child {
     color: #000000;
 }
 
+
 /* ========================================
-   HERO SECTION - WoodMart Minimalism 2-Column Layout
+   HERO SLIDER STYLES - Full-Width Background
 ======================================== */
-.hero-section {
-    background-color: #FFFFFF;
-    min-height: 70vh;
+.hero-slider-section {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    min-height: 600px;
+}
+
+.hero-swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
     display: flex;
     align-items: center;
-    padding: 100px 0;
+    justify-content: center;
+    height: 600px;
 }
 
-.hero-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 60px;
+/* Slide Overlay (Dark overlay for text readability) */
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);
+    z-index: 1;
 }
 
-/* Left Column: Text Content */
-.hero-content-left {
-    flex: 1;
-    max-width: 500px;
+/* Slide Content */
+.slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    color: #FFFFFF;
 }
 
-.hero-title {
-    font-size: 56px;
+.slide-headline {
+    font-size: 72px;
     font-weight: 700;
-    line-height: 1.2;
-    color: #242424;
+    line-height: 1.1;
+    color: #FFFFFF;
     margin-bottom: 25px;
     font-family: 'Lato', sans-serif;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.hero-description {
-    font-size: 16px;
+.slide-text {
+    font-size: 18px;
     line-height: 1.8;
-    color: #777777;
+    color: #FFFFFF;
     margin-bottom: 35px;
+    font-weight: 300;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
-.hero-button {
+.slide-text p {
+    margin-bottom: 15px;
+    color: #FFFFFF;
+}
+
+.slide-button {
     display: inline-block;
     padding: 18px 45px;
     background-color: #000000;
@@ -481,70 +511,158 @@ article:last-child {
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.hero-button:hover {
-    background-color: #242424;
-    color: #FFFFFF;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Right Column: Featured Image */
-.hero-image-right {
-    flex: 1;
-    text-align: right;
-}
-
-.hero-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
+.slide-button:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* ========================================
-   HERO SECTION RESPONSIVE DESIGN
+   ENTRANCE ANIMATIONS
 ======================================== */
-@media screen and (max-width: 1024px) {
-    .hero-title {
-        font-size: 42px;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
 
-    .hero-grid {
-        gap: 40px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animations only to active slide */
+.swiper-slide-active .animate-up {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Stagger animation delays */
+.swiper-slide-active .slide-headline {
+    animation-delay: 0.2s;
+}
+
+.swiper-slide-active .slide-text {
+    animation-delay: 0.4s;
+}
+
+.swiper-slide-active .slide-button {
+    animation-delay: 0.6s;
+}
+
+/* Hide elements initially */
+.animate-up {
+    opacity: 0;
+}
+
+/* ========================================
+   SWIPER NAVIGATION & PAGINATION
+======================================== */
+
+/* Navigation Arrows */
+.swiper-button-prev,
+.swiper-button-next {
+    color: #FFFFFF;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 20px;
+}
+
+/* Pagination Dots */
+.swiper-pagination {
+    bottom: 30px !important;
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #FFFFFF;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background-color: #FFFFFF;
+    width: 30px;
+    border-radius: 6px;
+}
+
+/* ========================================
+   HERO SLIDER RESPONSIVE DESIGN
+======================================== */
+@media screen and (max-width: 1024px) {
+    .hero-slider-section {
+        height: 500px;
+        min-height: 500px;
+    }
+
+    .swiper-slide {
+        height: 500px;
+    }
+
+    .slide-headline {
+        font-size: 56px;
+    }
+
+    .slide-text {
+        font-size: 16px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .hero-section {
-        padding: 60px 0;
-        min-height: auto;
+    .hero-slider-section {
+        height: 450px;
+        min-height: 450px;
     }
 
-    .hero-grid {
-        flex-direction: column;
-        gap: 30px;
+    .swiper-slide {
+        height: 450px;
     }
 
-    .hero-content-left {
+    .slide-content {
         text-align: center;
-        max-width: 100%;
+        padding: 0 20px;
     }
 
-    .hero-title {
-        font-size: 32px;
+    .slide-headline {
+        font-size: 36px;
     }
 
-    .hero-description {
+    .slide-text {
         font-size: 15px;
     }
 
-    .hero-image-right {
-        text-align: center;
+    .slide-button {
+        padding: 15px 35px;
+        font-size: 13px;
     }
 
-    .hero-img {
-        margin: 0 auto;
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 16px;
     }
 }
