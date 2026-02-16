@@ -862,65 +862,66 @@ article:last-child {
         display: none;
     }
 }
+
 /* ========================================
    TABLET RESPONSIVE DESIGN (768px - 1024px)
 ======================================== */
 @media screen and (max-width: 1024px) and (min-width: 768px) {
-    
+
     /* ========== HEADER OPTIMIZATION ========== */
-    
+
     .site-header {
         padding: 10px 20px;
     }
-    
+
     /* Reduce header container padding */
     .header-container {
         padding: 10px 20px;
     }
-    
+
     /* Reduce menu font size to prevent overflow */
     .primary-menu a {
         font-size: 12px;
         letter-spacing: 0.3px;
     }
-    
+
     .primary-menu {
         gap: 20px;
     }
-    
+
     /* Hide login text, keep icon only */
     .tool-text {
         display: none;
     }
-    
+
     /* Adjust logo size */
     .logo-text {
         font-size: 20px;
     }
-    
+
     .logo-icon {
         font-size: 20px;
     }
-    
+
     /* ========== HERO SLIDER TABLET OPTIMIZATION ========== */
-    
+
     .hero-slider-section {
         height: 500px;
         min-height: 500px;
     }
-    
+
     .swiper-slide {
         height: 500px;
     }
-    
+
     .slide-headline {
         font-size: 40px;
     }
-    
+
     .slide-text {
         font-size: 16px;
     }
-    
+
     .slide-button {
         padding: 15px 35px;
         font-size: 13px;
@@ -932,17 +933,17 @@ article:last-child {
    Switch to hamburger menu earlier for iPads
 ======================================== */
 @media screen and (max-width: 1023px) {
-    
+
     /* Hide desktop navigation */
     .header-left {
         display: none;
     }
-    
+
     /* Hide desktop user tools */
     .header-right {
         display: none;
     }
-    
+
     /* Show mobile toggle */
     .mobile-menu-toggle {
         display: flex;
@@ -957,7 +958,7 @@ article:last-child {
         transform: translateY(-50%);
         z-index: 1001;
     }
-    
+
     .mobile-menu-toggle span {
         display: block;
         width: 100%;
@@ -966,20 +967,20 @@ article:last-child {
         transition: all 0.3s ease;
         border-radius: 2px;
     }
-    
+
     /* Hamburger animation when menu is open */
     .menu-open .mobile-menu-toggle span:nth-child(1) {
         transform: rotate(45deg) translate(8px, 8px);
     }
-    
+
     .menu-open .mobile-menu-toggle span:nth-child(2) {
         opacity: 0;
     }
-    
+
     .menu-open .mobile-menu-toggle span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -7px);
     }
-    
+
     /* Mobile Navigation Overlay */
     .menu-open .header-left {
         display: block;
@@ -993,28 +994,28 @@ article:last-child {
         padding-top: 80px;
         overflow-y: auto;
     }
-    
+
     .menu-open .primary-menu {
         flex-direction: column;
         gap: 0;
         text-align: center;
     }
-    
+
     .menu-open .primary-menu li {
         border-bottom: 1px solid #ECECEC;
     }
-    
+
     .menu-open .primary-menu a {
         padding: 20px;
         font-size: 18px;
         display: block;
     }
-    
+
     /* Prevent body scroll when menu is open */
     .menu-open {
         overflow: hidden;
     }
-    
+
     /* Center logo on tablet */
     .header-container {
         justify-content: center;
@@ -1025,172 +1026,164 @@ article:last-child {
    CATEGORY PROMO GRID SECTION (WoodMart Style)
 ======================================== */
 
+/* ========================================
+   CATEGORY GRID SECTION - WoodMart Minimalist Style
+   Wide Rectangle Boxes with Right-Aligned Product Images
+======================================== */
 .category-grid-section {
-    padding: 60px 0;
     background-color: #FFFFFF;
 }
 
-.category-grid {
+.category-grid-section .container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 30px;
 }
 
-/* Individual Category Banner Item */
+/* Individual Category Banner Item - Wide Rectangle */
 .category-banner-item {
     position: relative;
     height: 280px;
-    background-size: cover;
-    background-position: center;
+    background-color: #f9f9f9;
+    background-size: contain;
+    background-position: right bottom;
     background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.4s ease-in-out;
+    transition: all 0.3s ease;
 }
 
-/* Background Image Scale Effect on Hover */
-.category-banner-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: inherit;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.4s ease-in-out;
-    z-index: 1;
+.category-banner-item:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.category-banner-item:hover::before {
-    transform: scale(1.1);
-}
-
-/* Gradient Overlay for Text Readability */
-.banner-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+/* Category Content - Restricted to Left Side */
+.category-content {
+    width: 55%;
+    padding-left: 30px;
     z-index: 2;
-}
-
-/* Banner Content Container */
-.banner-content {
     position: relative;
-    z-index: 3;
-    padding: 30px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    color: #FFFFFF;
 }
 
 /* Subtitle (Small Text Above Title) */
-.banner-subtitle {
+.category-subtitle {
     font-size: 12px;
     font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0 0 10px 0;
+    letter-spacing: 1px;
+    color: #888;
+    margin: 0 0 8px 0;
 }
 
 /* Main Title */
-.banner-title {
-    font-size: 24px;
-    font-weight: 700;
-    color: #FFFFFF;
-    margin: 0 0 20px 0;
+.category-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 15px 0;
     line-height: 1.3;
 }
 
-/* Read More Button */
-.banner-button {
+/* Read More Link */
+.category-link {
     display: inline-block;
-    padding: 12px 28px;
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #FFFFFF;
-    background-color: transparent;
-    border: 2px solid #FFFFFF;
-    transition: all 0.4s ease-in-out;
-    opacity: 0;
-    transform: translateY(20px);
+    color: #333;
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-/* Button Slide Up & Fade In on Hover */
-.category-banner-item:hover .banner-button {
-    opacity: 1;
-    transform: translateY(0);
+.category-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: width 0.3s ease;
 }
 
-/* Button Hover Effect */
-.banner-button:hover {
-    background-color: #FFFFFF;
-    color: #000000;
+.category-link:hover {
+    color: #000;
+}
+
+.category-link:hover::after {
+    width: 100%;
 }
 
 /* ========================================
    CATEGORY GRID RESPONSIVE DESIGN
 ======================================== */
 
-/* Tablet (768px - 1023px): 2 Columns */
-@media screen and (max-width: 1023px) {
-    .category-grid {
+/* Tablet (768px - 1024px): 2 Columns */
+@media screen and (max-width: 1024px) {
+    .category-grid-section .container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
-    
+
     .category-banner-item {
-        height: 250px;
+        height: 240px;
+        background-size: contain;
     }
-    
-    .banner-title {
+
+    .category-content {
+        width: 60%;
+        padding-left: 25px;
+    }
+
+    .category-title {
         font-size: 20px;
     }
 }
 
 /* Mobile (< 768px): 1 Column */
 @media screen and (max-width: 767px) {
-    .category-grid-section {
-        padding: 40px 0;
-    }
-    
-    .category-grid {
+    .category-grid-section .container {
         grid-template-columns: 1fr;
         gap: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
-    
+
     .category-banner-item {
         height: 220px;
+        background-size: contain;
     }
-    
-    .banner-content {
-        padding: 20px;
+
+    .category-content {
+        width: 65%;
+        padding-left: 20px;
     }
-    
-    .banner-subtitle {
+
+    .category-subtitle {
         font-size: 11px;
     }
-    
-    .banner-title {
+
+    .category-title {
         font-size: 18px;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
-    
-    /* Show button by default on mobile (no hover) */
-    .banner-button {
-        opacity: 1;
-        transform: translateY(0);
+
+    .category-link {
         font-size: 12px;
-        padding: 10px 24px;
     }
 }
