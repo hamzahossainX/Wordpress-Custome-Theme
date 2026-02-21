@@ -11,8 +11,10 @@ Text Domain: antigravity
 Tags: custom-theme, minimalist, woodmart-clone, corporate
 */
 
-/* Import Inter Font for Modern Typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* ========================================
+   GOOGLE FONTS — Cormorant Garamond (headings) + Inter (body)
+======================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ========================================
    RESET & BASE STYLES
@@ -24,13 +26,22 @@ Tags: custom-theme, minimalist, woodmart-clone, corporate
 }
 
 body {
-    font-family: 'Lato', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 14px;
     line-height: 1.6;
     color: #242424;
     background-color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
 a {
@@ -452,18 +463,64 @@ article:last-child {
 
 
 /* ========================================
-   HERO SLIDER STYLES - Full-Width Background (WoodMart Professional)
+   NAVBAR — Transparent to Solid on Scroll
 ======================================== */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    /* Transparent on load */
+    background-color: transparent;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Solid white when user scrolls down (class added by main.js) */
+.site-header.scrolled {
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Nav links — slightly increased letter spacing for luxury feel */
+.primary-menu a {
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+/* Keep nav links white on transparent header, dark once scrolled */
+.site-header:not(.scrolled) .primary-menu a,
+.site-header:not(.scrolled) .logo-text,
+.site-header:not(.scrolled) .header-tools a,
+.site-header:not(.scrolled) .tool-text,
+.site-header:not(.scrolled) .dashicons {
+    color: #FFFFFF;
+}
+
+.site-header:not(.scrolled) .tool-link:hover,
+.site-header:not(.scrolled) .primary-menu a:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ========================================
+   HERO SLIDER STYLES — Full Viewport, Premium
+======================================== */
+
 .hero-slider-section {
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 100vh;
     min-height: 600px;
+    overflow: hidden;
 }
 
 .hero-swiper {
     width: 100%;
     height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
 }
 
 .swiper-slide {
@@ -471,96 +528,233 @@ article:last-child {
     background-position: center center;
     background-repeat: no-repeat;
     position: relative;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center;
-    height: 600px;
-}
-
-/* Slide Overlay (Dark overlay for text readability) */
-.slide-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 100%);
-    z-index: 1;
 }
 
-/* Slide Content Container */
-.slide-content {
-    position: relative;
+/* Dark gradient overlay — strong on left for text readability */
+.hero-slider-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     z-index: 2;
-    width: 100%;
-    max-width: 800px;
-    color: #FFFFFF;
+    background: linear-gradient(to right,
+            rgba(0, 0, 0, 0.72) 0%,
+            rgba(0, 0, 0, 0.45) 45%,
+            rgba(0, 0, 0, 0.10) 75%,
+            rgba(0, 0, 0, 0.00) 100%);
+    pointer-events: none;
 }
 
-/* Inner Content Wrapper for Perfect Centering */
-.hero-content-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    z-index: 10;
-    position: relative;
-}
-
-/* Headline Styling */
-.slide-headline {
-    font-size: 60px;
-    font-weight: 700;
-    line-height: 1.2;
-    color: #FFFFFF;
-    margin-bottom: 25px;
-    font-family: 'Lato', sans-serif;
-    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
-}
-
-/* Description Text */
-.slide-text {
-    font-size: 18px;
-    line-height: 1.8;
-    color: #FFFFFF;
-    margin-bottom: 35px;
-    font-weight: 300;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-.slide-text p {
-    margin-bottom: 15px;
-    color: #FFFFFF;
-}
-
-/* Button Styling (WoodMart Style: White BG, Black Text) */
-.slide-button {
-    display: inline-block;
-    padding: 15px 40px;
-    background-color: #FFFFFF;
-    color: #000000;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.slide-button:hover {
-    background-color: #000000;
-    color: #FFFFFF;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+/* Subtle grain texture overlay */
+.hero-slider-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    pointer-events: none;
 }
 
 /* ========================================
-   ENTRANCE ANIMATIONS
+   HERO STATIC CONTENT — always-visible left-side text
+======================================== */
+
+.hero-static-content {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 50%;
+    max-width: 600px;
+    padding: 0 0 0 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ---- Hero label ---- */
+.hero-label {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.75);
+    /* stagger: element 1 */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease 0s, transform 0.7s ease 0s;
+}
+
+/* ---- Main H1 heading ---- */
+.hero-heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(44px, 5.5vw, 80px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+    /* stagger: element 2 */
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease 0.18s, transform 0.7s ease 0.18s;
+}
+
+/* ---- Description paragraph ---- */
+.hero-description {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 400px;
+    /* stagger: element 3 */
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease 0.36s, transform 0.7s ease 0.36s;
+}
+
+/* ---- CTA Button ---- */
+.hero-cta-button {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 14px 42px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #FFFFFF;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    /* stagger: element 4 */
+    opacity: 0;
+    transform: translateY(25px);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+        opacity 0.7s ease 0.54s, transform 0.7s ease 0.54s;
+}
+
+.hero-cta-button:hover {
+    background: #FFFFFF;
+    color: #1a1a1a;
+    border-color: #FFFFFF;
+}
+
+/* When .is-animated added by JS → reveal all hero elements */
+.hero-static-content.is-animated .hero-label,
+.hero-static-content.is-animated .hero-heading,
+.hero-static-content.is-animated .hero-description,
+.hero-static-content.is-animated .hero-cta-button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   FLOATING NEW BADGE
+======================================== */
+
+@keyframes badge-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.55);
+    }
+
+    70% {
+        box-shadow: 0 0 0 18px rgba(212, 175, 55, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+}
+
+.hero-badge {
+    position: absolute;
+    top: 100px;
+    right: 60px;
+    z-index: 15;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #D4AF37 0%, #F5D06E 50%, #B8860B 100%);
+    color: #1a1a1a;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+    animation: badge-pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   BOUNCING SCROLL-DOWN ARROW
+======================================== */
+
+@keyframes arrow-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateY(10px);
+        opacity: 1;
+    }
+}
+
+.hero-scroll-arrow {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+    color: rgba(255, 255, 255, 0.8);
+    animation: arrow-bounce 1.8s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.hero-scroll-arrow svg {
+    display: block;
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+/* ========================================
+   HERO PROGRESS BAR (replaces dot pagination)
+======================================== */
+
+.hero-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 20;
+    overflow: hidden;
+}
+
+.hero-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #D4AF37, #FFFFFF);
+    /* width & transition controlled by JS */
+}
+
+/* ========================================
+   ANIMATIONS — keyframes (keep for legacy .animate-up)
 ======================================== */
 @keyframes fadeInUp {
     from {
@@ -574,12 +768,10 @@ article:last-child {
     }
 }
 
-/* Apply animations only to active slide */
 .swiper-slide-active .animate-up {
     animation: fadeInUp 0.8s ease forwards;
 }
 
-/* Stagger animation delays */
 .swiper-slide-active .slide-headline {
     animation-delay: 0.2s;
 }
@@ -592,7 +784,6 @@ article:last-child {
     animation-delay: 0.6s;
 }
 
-/* Hide elements initially */
 .animate-up {
     opacity: 0;
 }
@@ -803,49 +994,67 @@ article:last-child {
 
     /* ========== HERO SLIDER MOBILE OPTIMIZATION ========== */
 
+    /* Push page content below fixed header */
+    body {
+        padding-top: 0;
+        /* hero is full-screen, no offset needed */
+    }
+
     .hero-slider-section {
-        height: 400px !important;
-        min-height: 400px !important;
+        height: 100svh !important;
+        min-height: 480px !important;
     }
 
-    .swiper-slide {
-        height: 400px !important;
+    /* Hero static content: center on mobile */
+    .hero-static-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 24px;
+        top: auto;
+        bottom: auto;
+        left: 0;
+        right: 0;
+        transform: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        align-items: center;
+        text-align: center;
     }
 
-    .slide-content {
-        padding: 0 20px;
+    .hero-label {
+        font-size: 10px;
+        letter-spacing: 2.5px;
     }
 
-    /* Reduce title size for mobile */
-    .slide-headline {
-        font-size: 28px !important;
-        margin-bottom: 15px;
-        line-height: 1.3;
+    .hero-heading {
+        font-size: clamp(34px, 8vw, 50px);
     }
 
-    .slide-text {
-        font-size: 14px !important;
-        margin-bottom: 20px;
+    .hero-description {
+        font-size: 13px;
+        max-width: 90%;
     }
 
-    .slide-button {
-        padding: 12px 30px !important;
-        font-size: 12px !important;
+    .hero-cta-button {
+        align-self: center;
+        padding: 12px 32px;
+        font-size: 11px;
     }
 
-    /* Pagination dots adjustment */
-    .swiper-pagination {
-        bottom: 20px !important;
+    /* Hide NEW badge on mobile to avoid overlap */
+    .hero-badge {
+        display: none;
     }
 
-    .swiper-pagination-bullet {
-        width: 6px !important;
-        height: 6px !important;
-        margin: 0 4px !important;
+    /* Scroll arrow stays but smaller */
+    .hero-scroll-arrow {
+        bottom: 20px;
     }
 
-    .swiper-pagination-bullet-active {
-        width: 18px !important;
+    .hero-scroll-arrow svg {
+        width: 22px;
+        height: 22px;
     }
 
     /* ========== FOOTER ========== */
@@ -1731,7 +1940,7 @@ article:last-child {
 
 .woocommerce ul.products li.product .button,
 .home ul.products li.product .button {
- git   transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .woocommerce ul.products li.product:hover .button,
