@@ -101,5 +101,40 @@
         }
 
         initSwiperProgress();
+
+        /* =====================================================
+           3. PRODUCT CARD SCROLL-REVEAL (IntersectionObserver)
+           Staggered fade-in as cards enter the viewport
+        ===================================================== */
+        const productCards = document.querySelectorAll('.product-card[data-animate="fade-up"]');
+
+        if (productCards.length && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        const card = entry.target;
+                        // Calculate stagger delay based on column position (0-indexed)
+                        const index = parseInt(card.dataset.cardIndex || 0, 10);
+                        card.style.transitionDelay = (index * 0.08) + 's';
+                        card.classList.add('is-visible');
+                        observer.unobserve(card); // animate once
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            productCards.forEach(function (card, index) {
+                card.dataset.cardIndex = index;
+                observer.observe(card);
+            });
+        } else {
+            // Fallback: reveal all immediately (old browsers / no support)
+            productCards.forEach(function (card) {
+                card.classList.add('is-visible');
+            });
+        }
+
     });
 })();

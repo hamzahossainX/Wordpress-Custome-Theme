@@ -2095,3 +2095,338 @@ body.home ul.products li.product {
         width: 100%;
     }
 }
+
+
+/* ============================================================
+   FEATURED PRODUCTS SECTION — Premium Redesign
+============================================================ */
+
+/* ---- Section wrapper ---- */
+.featured-products-section {
+    background-color: #f8f8f8;
+    padding: 80px 0 100px;
+}
+
+/* ---- Heading with decorative underline ---- */
+.featured-products-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 12px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.featured-products-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(to right, #D4AF37, #b8860b);
+    margin: 12px auto 0;
+}
+
+/* wrapper so the heading + underline sit centred as a block */
+.featured-products-section .container>.featured-products-title {
+    display: block;
+    left: auto;
+    transform: none;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+/* ---- Product Grid ---- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 52px;
+}
+
+/* ---- Product Card ---- */
+.product-card {
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Scroll-reveal initial state */
+    opacity: 0;
+    transform: translateY(36px);
+}
+
+/* Revealed state (added by IntersectionObserver JS) */
+.product-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease,
+        box-shadow 0.3s ease;
+    /* keep box-shadow transition active */
+}
+
+/* Hover lift */
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ---- Wishlist heart button ---- */
+.product-wishlist {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.92);
+    color: #888;
+    font-size: 17px;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.25s ease, transform 0.25s ease, color 0.2s ease, background 0.2s ease;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.product-card:hover .product-wishlist {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.product-wishlist:hover {
+    color: #c0392b;
+    background: #fff;
+}
+
+/* ---- Product image wrapper — contains zoom + overlay ---- */
+.product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: #f0eeec;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* ---- Image dark overlay ---- */
+.product-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.35s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.product-card:hover .product-image-overlay {
+    background: rgba(0, 0, 0, 0.28);
+}
+
+/* ---- Slide-up Add to Cart button ---- */
+.product-hover-action {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgba(26, 26, 26, 0.92);
+    backdrop-filter: blur(4px);
+    padding: 14px 0;
+    text-align: center;
+}
+
+.product-card:hover .product-hover-action {
+    transform: translateY(0);
+}
+
+.product-add-to-cart-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+/* ---- Product info (below image) ---- */
+.product-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-info {
+    padding: 16px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* ---- Category label ---- */
+.product-category {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0;
+}
+
+/* ---- Product title ---- */
+.product-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.3;
+    margin: 0;
+    transition: color 0.2s ease;
+}
+
+.product-card:hover .product-title {
+    color: #000;
+}
+
+/* ---- Price — override WooCommerce green for sale price ---- */
+.product-price {
+    margin-top: 2px;
+}
+
+/* Regular price (shown next to sale) — grey strikethrough */
+.product-price del,
+.product-price .woocommerce-Price-amount.amount del,
+del .woocommerce-Price-amount {
+    color: #aaa !important;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: line-through;
+}
+
+/* Sale price — dark & bold, NOT green */
+.product-price ins,
+.product-price ins .woocommerce-Price-amount {
+    color: #1a1a1a !important;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    background: none;
+    padding: 0;
+}
+
+/* Regular (non-sale) price */
+.product-price .woocommerce-Price-amount.amount {
+    color: #1a1a1a;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Remove any inherited green from WooCommerce */
+.woocommerce span.onsale,
+.product-price .price {
+    color: inherit;
+}
+
+/* ---- View All Products button ---- */
+.view-all-wrapper {
+    text-align: center;
+    margin-top: 4px;
+}
+
+.view-all-btn {
+    display: inline-block;
+    padding: 14px 52px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    background: transparent;
+    border: 1.5px solid #1a1a1a;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.view-all-btn:hover {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* ---- Scroll-reveal keyframe ---- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(36px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   FEATURED PRODUCTS — RESPONSIVE
+============================================================ */
+
+/* Tablet: 2 columns */
+@media screen and (max-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Mobile: 1 column */
+@media screen and (max-width: 600px) {
+    .featured-products-section {
+        padding: 52px 0 70px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* Always show hover action on touch devices */
+    .product-hover-action {
+        transform: translateY(0);
+    }
+
+    .product-wishlist {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .view-all-btn {
+        padding: 13px 36px;
+    }
+}
