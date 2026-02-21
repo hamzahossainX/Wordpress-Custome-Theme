@@ -1026,13 +1026,9 @@ article:last-child {
 }
 
 /* ========================================
-   CATEGORY PROMO GRID SECTION (WoodMart Style)
+   CATEGORY BANNER SECTION — Premium Modern Style
 ======================================== */
 
-/* ========================================
-   CATEGORY GRID SECTION - WoodMart Minimalist Style
-   Wide Rectangle Boxes with Right-Aligned Product Images
-======================================== */
 .category-grid-section {
     background-color: #FFFFFF;
 }
@@ -1042,101 +1038,247 @@ article:last-child {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* ---- Category Grid Row: 3 equal columns ---- */
+/* ---- Grid Row: 3 equal columns, equal height ---- */
 .category-grid {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     gap: 20px;
     width: 100%;
+    align-items: stretch;
 }
 
-/* Individual Category Banner Item - Wide Rectangle */
+/* ============================================================
+   CARD — the main interactive tile
+   Background image is set inline via style="" in PHP.
+   We zoom it on hover using a ::before pseudo-element trick.
+============================================================ */
 .category-banner-item {
+    flex: 1 1 0;
+    min-width: 0;
     position: relative;
     height: 280px;
-    background-color: #f9f9f9;
-    background-size: contain;
-    background-position: right bottom;
+    background-color: #f5f5f5;
+    background-size: cover;
+    /* fill the card */
+    background-position: center right;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
     overflow: hidden;
+    border-radius: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    /* Lift + shadow transition */
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
+/* Pseudo-element carries the background so we can scale it
+   independently without moving the text */
+.category-banner-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* top/right/bottom/left: 0 */
+    background: inherit;
+    /* copies background-image from parent */
+    background-size: cover;
+    background-position: center right;
+    transform-origin: center right;
+    transition: transform 0.45s ease;
+    border-radius: inherit;
+    z-index: 0;
+}
+
+/* Card lift on hover */
 .category-banner-item:hover {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14);
 }
 
-/* Category Content - Restricted to Left Side */
-.category-content {
-    width: 55%;
-    padding-left: 30px;
-    z-index: 2;
+/* Image zoom on hover */
+.category-banner-item:hover::before {
+    transform: scale(1.07);
+}
+
+/* ============================================================
+   GRADIENT OVERLAY — makes left text side readable
+============================================================ */
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    /* gradient: solid on the left, transparent on the right half */
+    background: linear-gradient(to right,
+            rgba(245, 245, 245, 0.97) 0%,
+            rgba(245, 245, 245, 0.85) 45%,
+            rgba(245, 245, 245, 0.10) 75%,
+            rgba(245, 245, 245, 0.00) 100%);
+    border-radius: inherit;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ============================================================
+   BANNER CONTENT — text sits above overlay
+============================================================ */
+.banner-content {
     position: relative;
+    z-index: 2;
+    width: 55%;
+    padding: 0 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* Subtitle (Small Text Above Title) */
-.category-subtitle {
+/* Subtitle (e.g. "NEW COLLECTION") */
+.banner-subtitle {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: #888;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Main title (e.g. "Shoes") */
+.banner-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+}
+
+/* ============================================================
+   BUTTON — stylish bordered "READ MORE" with arrow on hover
+============================================================ */
+.banner-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0px;
+    /* gap expands on hover via span */
+    margin-top: 6px;
+    padding: 9px 20px;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: #1a1a1a;
+    background: transparent;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 50px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        padding-right 0.3s ease,
+        gap 0.3s ease;
+    width: fit-content;
+}
+
+/* Arrow: hidden by default, slides in on hover */
+.banner-button::after {
+    content: '→';
+    position: absolute;
+    right: 16px;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-size: 14px;
+}
+
+.banner-button:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+    border-color: #1a1a1a;
+    padding-right: 38px;
+    /* make room for arrow */
+}
+
+.banner-button:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ============================================================
+   ALSO SUPPORT old .category-* class names (backwards compat)
+============================================================ */
+.category-content {
+    position: relative;
+    z-index: 2;
+    width: 55%;
+    padding-left: 30px;
+}
+
+.category-subtitle {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
     color: #888;
     margin: 0 0 8px 0;
 }
 
-/* Main Title */
 .category-title {
-    font-size: 22px;
-    font-weight: 600;
-    color: #333;
-    margin: 0 0 15px 0;
-    line-height: 1.3;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 14px 0;
+    line-height: 1.25;
 }
 
-/* Read More Link */
 .category-link {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 20px;
+    font-size: 12px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #333;
+    letter-spacing: 1px;
+    color: #1a1a1a;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 50px;
+    text-decoration: none;
     position: relative;
-    transition: all 0.3s ease;
+    overflow: hidden;
+    transition: color 0.3s ease, background 0.3s ease, padding-right 0.3s ease;
+    width: fit-content;
 }
 
 .category-link::after {
-    content: '';
+    content: '→';
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #000;
-    transition: width 0.3s ease;
+    right: 16px;
+    opacity: 0;
+    transform: translateX(-6px);
+    font-weight: normal;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .category-link:hover {
-    color: #000;
+    background: #1a1a1a;
+    color: #ffffff;
+    padding-right: 38px;
 }
 
 .category-link:hover::after {
-    width: 100%;
+    opacity: 1;
+    transform: translateX(0);
 }
 
-/* ========================================
-   CATEGORY GRID RESPONSIVE DESIGN
-======================================== */
+/* ============================================================
+   RESPONSIVE — CATEGORY GRID
+============================================================ */
 
 /* Category banner items: equal-width flex children */
 .category-banner-item {
@@ -1152,14 +1294,15 @@ article:last-child {
 
     .category-banner-item {
         height: 240px;
-        background-size: contain;
     }
 
+    .banner-content,
     .category-content {
         width: 60%;
         padding-left: 25px;
     }
 
+    .banner-title,
     .category-title {
         font-size: 20px;
     }
@@ -1169,38 +1312,49 @@ article:last-child {
 @media screen and (max-width: 767px) {
     .category-grid {
         flex-direction: column;
-        gap: 15px;
+        gap: 16px;
     }
 
     .category-banner-item {
         flex: none;
         width: 100%;
-        height: 220px;
-        background-size: contain;
+        height: 200px;
     }
 
+    .banner-content,
     .category-content {
-        width: 65%;
+        width: 58%;
         padding-left: 20px;
+        gap: 8px;
     }
 
+    .banner-subtitle,
     .category-subtitle {
-        font-size: 11px;
+        font-size: 10px;
+        letter-spacing: 1.4px;
     }
 
+    .banner-title,
     .category-title {
         font-size: 18px;
-        margin-bottom: 12px;
     }
 
+    .banner-button,
     .category-link {
-        font-size: 12px;
+        font-size: 11px;
+        padding: 8px 18px;
+    }
+
+    .banner-button:hover,
+    .category-link:hover {
+        padding-right: 34px;
     }
 }
 
 
-
-
+/* ============================================================
+   FEATURED PRODUCTS SECTION
+   ============================================================ */
 .featured-products-section {
     background-color: #FFFFFF;
     padding: 60px 0;
@@ -1577,7 +1731,7 @@ article:last-child {
 
 .woocommerce ul.products li.product .button,
 .home ul.products li.product .button {
-    transition: all 0.3s ease;
+ git   transition: all 0.3s ease;
 }
 
 .woocommerce ul.products li.product:hover .button,
