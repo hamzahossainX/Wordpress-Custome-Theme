@@ -11,9 +11,6 @@ Text Domain: antigravity
 Tags: custom-theme, minimalist, woodmart-clone, corporate
 */
 
-/* Import Inter Font for Modern Typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
 /* ========================================
    RESET & BASE STYLES
 ======================================== */
@@ -1046,15 +1043,9 @@ article:last-child {
     margin-bottom: 30px;
     padding-left: 15px;
     padding-right: 15px;
-}
-
-/* ---- Category Grid Row: 3 equal columns ---- */
-.category-grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 20px;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
 }
 
 /* Individual Category Banner Item - Wide Rectangle */
@@ -1138,16 +1129,13 @@ article:last-child {
    CATEGORY GRID RESPONSIVE DESIGN
 ======================================== */
 
-/* Category banner items: equal-width flex children */
-.category-banner-item {
-    flex: 1 1 0;
-    min-width: 0;
-}
-
-/* Tablet (768px – 1024px): keep 3-column row but tighten gap */
+/* Tablet (768px - 1024px): 2 Columns */
 @media screen and (max-width: 1024px) {
-    .category-grid {
-        gap: 15px;
+    .category-grid-section .container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .category-banner-item {
@@ -1165,16 +1153,18 @@ article:last-child {
     }
 }
 
-/* Mobile (< 768px): stack vertically */
+/* Mobile (< 768px): 1 Column */
 @media screen and (max-width: 767px) {
-    .category-grid {
-        flex-direction: column;
+    .category-grid-section .container {
+        grid-template-columns: 1fr;
         gap: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     .category-banner-item {
-        flex: none;
-        width: 100%;
         height: 220px;
         background-size: contain;
     }
@@ -1198,7 +1188,7 @@ article:last-child {
     }
 }
 
-
+/* ========================================
 
 
 .featured-products-section {
@@ -1498,7 +1488,6 @@ article:last-child {
 
 
 @media screen and (max-width: 1024px) {
-
     .home .featured-products-section ul.products,
     .home .woocommerce ul.products,
     .home ul.products {
@@ -1508,7 +1497,6 @@ article:last-child {
 }
 
 @media screen and (max-width: 767px) {
-
     .home .featured-products-section ul.products,
     .home .woocommerce ul.products,
     .home ul.products {
@@ -1521,11 +1509,13 @@ article:last-child {
     }
 }
 
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 .woocommerce ul.products li.product,
 .home ul.products li.product {
     font-family: 'Inter', 'Lato', sans-serif !important;
 }
-
 
 
 .woocommerce ul.products li.product img,
@@ -1700,8 +1690,6 @@ body.home ul.products li.product {
     z-index: 1;
 }
 
-/* Tablet (768px - 1024px): 2 Columns */
-@media screen and (max-width: 1024px) {
 
     .home .woocommerce ul.products,
     .home .featured-products-section ul.products,
@@ -1711,17 +1699,16 @@ body.home ul.products li.product {
     }
 }
 
-/* Mobile (< 768px): 1 Column */
+/* Mobile (< 768px): 1 Column 
 @media screen and (max-width: 767px) {
-
     .home .woocommerce ul.products,
     .home .featured-products-section ul.products,
     body.home ul.products {
         grid-template-columns: repeat(1, 1fr) !important;
         gap: 20px !important;
     }
-
-    /* Show button by default on mobile (no hover) */
+    
+    /* Show button by default on mobile (no hover) 
     .home ul.products li.product .button,
     .home ul.products li.product .add_to_cart_button {
         opacity: 1;
@@ -1730,5 +1717,700 @@ body.home ul.products li.product {
         transform: none;
         margin-top: 15px;
         width: 100%;
+    }
+}
+
+/* ========================================
+   CATEGORY BANNER SECTION - ISOLATION & RESTORATION
+   High-Specificity Override to Prevent Conflicts
+======================================== 
+
+/* Force 3-Column Grid for Category Banners 
+section.category-grid-section .container,
+.category-grid-section > .container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 30px auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* Category Banner Item - Fixed Professional Height 
+.category-grid-section .category-banner-item,
+section.category-grid-section .category-banner-item {
+    height: 280px !important;
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    background-size: contain !important;
+    background-position: right bottom !important;
+    background-repeat: no-repeat !important;
+    background-color: #f9f9f9 !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Category Content - Left Side Only (50% Width) 
+.category-grid-section .category-content,
+section.category-grid-section .category-content {
+    width: 50% !important;
+    padding-left: 30px !important;
+    z-index: 2 !important;
+    position: relative !important;
+}
+
+/* Category Banner Hover Effect 
+.category-grid-section .category-banner-item:hover,
+section.category-grid-section .category-banner-item:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Responsive: Tablet (2 Columns) 
+@media screen and (max-width: 1024px) {
+    section.category-grid-section .container,
+    .category-grid-section > .container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .category-grid-section .category-banner-item {
+        height: 240px !important;
+    }
+    
+    .category-grid-section .category-content {
+        width: 55% !important;
+    }
+}
+
+/* Responsive: Mobile (1 Column) 
+@media screen and (max-width: 767px) {
+    section.category-grid-section .container,
+    .category-grid-section > .container {
+        grid-template-columns: repeat(1, 1fr) !important;
+        gap: 15px !important;
+        margin: 20px auto !important;
+    }
+    
+    .category-grid-section .category-banner-item {
+        height: 220px !important;
+    }
+    
+    .category-grid-section .category-content {
+        width: 60% !important;
+        padding-left: 20px !important;
+    }
+}
+
+/* ========================================
+   CATEGORY BANNER SECTION - FINAL FIX
+   Targeting the Correct Grid Container (.category-grid)
+======================================== 
+
+/* Target the actual grid wrapper inside container 
+.category-grid-section .category-grid,
+section.category-grid-section .category-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+/* Ensure container has proper width constraints 
+.category-grid-section .container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 30px auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* Category Banner Items inside .category-grid 
+.category-grid-section .category-grid .category-banner-item {
+    height: 280px !important;
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    background-size: contain !important;
+    background-position: right bottom !important;
+    background-repeat: no-repeat !important;
+    background-color: #f9f9f9 !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Banner Content (Text on Left - 50% Width) 
+.category-grid-section .category-grid .banner-content {
+    width: 50% !important;
+    padding-left: 30px !important;
+    z-index: 2 !important;
+    position: relative !important;
+}
+
+/* Responsive: Tablet 
+@media screen and (max-width: 1024px) {
+    .category-grid-section .category-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .category-grid-section .category-grid .category-banner-item {
+        height: 240px !important;
+    }
+}
+
+/* Responsive: Mobile 
+@media screen and (max-width: 767px) {
+    .category-grid-section .category-grid {
+        grid-template-columns: repeat(1, 1fr) !important;
+        gap: 15px !important;
+    }
+    
+    .category-grid-section .category-grid .category-banner-item {
+        height: 220px !important;
+    }
+    
+    .category-grid-section .category-grid .banner-content {
+        width: 60% !important;
+        padding-left: 20px !important;
+    }
+}
+
+/* ========================================
+   CATEGORY BANNER SECTION - EMERGENCY RESTORATION
+   Maximum Priority Override - 3-Column Grid
+======================================== */
+
+/* Force 3-Column Grid Layout - All Possible Selectors 
+.category-grid-section .container,
+.category-grid-section .category-grid,
+.category-grid-wrapper,
+section.category-grid-section > .container,
+section.category-grid-section .container > .category-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 50px auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* Category Banner Item - Fixed Box Shape 
+.category-grid-section .category-banner-item,
+.category-grid .category-banner-item,
+section.category-grid-section .category-banner-item {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    height: 300px !important;
+    width: 100% !important;
+    background-size: cover !important;
+    background-position: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    float: none !important;
+}
+
+/* Banner Content - Vertically Centered 
+.category-grid-section .banner-content,
+.category-banner-item .banner-content {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    padding: 30px !important;
+    height: 100% !important;
+    position: relative !important;
+    z-index: 3 !important;
+}
+
+/* Banner Overlay for Text Readability 
+.category-grid-section .banner-overlay,
+.category-banner-item .banner-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%) !important;
+    z-index: 2 !important;
+}
+
+/* Typography - Ensure Readability 
+.category-grid-section .banner-title,
+.category-banner-item .banner-title {
+    color: #FFFFFF !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    margin-bottom: 20px !important;
+}
+
+.category-grid-section .banner-subtitle,
+.category-banner-item .banner-subtitle {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    margin-bottom: 10px !important;
+}
+
+/* ========================================
+   RESPONSIVE GRID LAYOUT
+======================================== 
+
+/* Tablet (768px - 1024px): 2 Columns 
+@media screen and (max-width: 1024px) {
+    .category-grid-section .container,
+    .category-grid-section .category-grid,
+    .category-grid-wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+        margin: 40px auto !important;
+    }
+    
+    .category-grid-section .category-banner-item {
+        height: 280px !important;
+    }
+}
+
+/* Mobile (< 768px): 1 Column 
+@media screen and (max-width: 767px) {
+    .category-grid-section .container,
+    .category-grid-section .category-grid,
+    .category-grid-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        margin: 30px auto !important;
+    }
+    
+    .category-grid-section .category-banner-item {
+        height: 250px !important;
+    }
+    
+    .category-grid-section .banner-content {
+        padding: 20px !important;
+    }
+}
+
+/* ========================================
+   CATEGORY BANNER HARD RESET - FINAL FIX
+   Nuclear Option: Override Everything
+======================================== */
+
+/* Step 1: Reset Container to Full Width 
+.category-grid-section {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.category-grid-section .container {
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 50px auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    display: block !important;
+}
+
+/* Step 2: Force Grid on .category-grid 
+.category-grid-section .container .category-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+/* Step 3: Force Items to Fill Grid Cells 
+.category-grid-section .category-grid .category-banner-item {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 280px !important;
+    min-height: 280px !important;
+    max-height: 280px !important;
+    display: block !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+    flex: none !important;
+}
+
+/* Step 4: Fix Content Positioning 
+.category-grid-section .category-grid .category-banner-item .banner-content,
+.category-grid-section .category-grid .category-banner-item .category-content {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    padding: 30px !important;
+    z-index: 3 !important;
+}
+
+/* Step 5: Ensure Overlay Doesn't Break Layout 
+.category-grid-section .category-grid .category-banner-item .banner-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 2 !important;
+}
+
+/* Responsive: Tablet 
+@media screen and (max-width: 1024px) {
+    .category-grid-section .container .category-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .category-grid-section .category-grid .category-banner-item {
+        height: 240px !important;
+        min-height: 240px !important;
+        max-height: 240px !important;
+    }
+}
+
+/* Responsive: Mobile 
+@media screen and (max-width: 767px) {
+    .category-grid-section .container .category-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .category-grid-section .category-grid .category-banner-item {
+        height: 220px !important;
+        min-height: 220px !important;
+        max-height: 220px !important;
+    }
+    
+    .category-grid-section .category-grid .category-banner-item .banner-content {
+        padding: 20px !important;
+    }
+}
+
+/* ========================================
+   CATEGORY BANNER - ULTRA AGGRESSIVE FIX
+   Maximum Specificity Override
+======================================== */
+
+/* FORCE GRID LAYOUT - Maximum Priority 
+body.home section.category-grid-section .container,
+body section.category-grid-section .container,
+section.category-grid-section > .container,
+.category-grid-section .container,
+.category-grid-wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 40px auto !important;
+    padding: 0 15px !important;
+    box-sizing: border-box !important;
+}
+
+/* FORCE BOX SHAPE - Ultra Specific Selector 
+body.home section.category-grid-section .category-banner-item,
+body section.category-grid-section .category-banner-item,
+section.category-grid-section .category-banner-item,
+.category-grid-section .category-banner-item,
+.category-banner-item {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: 280px !important;
+    min-height: 280px !important;
+    max-height: 280px !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    float: none !important;
+    flex: none !important;
+}
+
+/* FORCE CONTENT POSITIONING 
+body section.category-grid-section .category-banner-item .banner-content,
+section.category-grid-section .category-banner-item .banner-content,
+.category-banner-item .banner-content {
+    position: relative !important;
+    z-index: 3 !important;
+    padding: 30px !important;
+    width: 100% !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+}
+
+/* FORCE OVERLAY 
+body section.category-grid-section .category-banner-item .banner-overlay,
+section.category-grid-section .category-banner-item .banner-overlay,
+.category-banner-item .banner-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%) !important;
+    z-index: 2 !important;
+}
+
+/* ========================================
+   RESPONSIVE - ULTRA AGGRESSIVE
+======================================== */
+
+/* Tablet (768px - 1024px): 2 Columns 
+@media screen and (max-width: 1024px) {
+    body.home section.category-grid-section .container,
+    body section.category-grid-section .container,
+    section.category-grid-section > .container,
+    .category-grid-section .container,
+    .category-grid-wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    body.home section.category-grid-section .category-banner-item,
+    body section.category-grid-section .category-banner-item,
+    .category-banner-item {
+        height: 240px !important;
+        min-height: 240px !important;
+        max-height: 240px !important;
+    }
+}
+
+/* Mobile (< 768px): 1 Column 
+@media screen and (max-width: 767px) {
+    body.home section.category-grid-section .container,
+    body section.category-grid-section .container,
+    section.category-grid-section > .container,
+    .category-grid-section .container,
+    .category-grid-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        margin: 30px auto !important;
+    }
+    
+    body.home section.category-grid-section .category-banner-item,
+    body section.category-grid-section .category-banner-item,
+    .category-banner-item {
+        height: 220px !important;
+        min-height: 220px !important;
+        max-height: 220px !important;
+    }
+    
+    .category-banner-item .banner-content {
+        padding: 20px !important;
+    }
+}
+
+/* ========================================
+   CATEGORY BANNER SECTION - FINAL COMPREHENSIVE FIX
+   WoodMart Minimalism Design Replication
+   Wide Rectangle "Credit Card" Layout
+======================================== */
+
+/* RESET: Clear all conflicting styles 
+.category-grid-section * {
+    box-sizing: border-box;
+}
+
+/* CONTAINER: Full-width wrapper with constraints 
+.category-grid-section {
+    width: 100%;
+    padding: 50px 0;
+    background-color: #FFFFFF;
+}
+
+/* GRID WRAPPER: Force 3-column layout 
+.category-grid-section .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.category-grid-section .container .category-grid,
+.category-grid-section .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* CATEGORY BANNER ITEM: Wide Rectangle Shape 
+.category-grid-section .category-banner-item {
+    /* Dimensions: Credit Card Aspect Ratio 
+    width: 100%;
+    height: 260px;
+    min-height: 260px;
+    
+    /* Layout 
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    
+    /* Background 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f5f5f5;
+    
+    /* Reset conflicting properties 
+    margin: 0;
+    padding: 0;
+    float: none;
+    flex: none;
+    
+    /* Polish 
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-grid-section .category-banner-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* BANNER OVERLAY: Dark gradient for text readability 
+.category-grid-section .banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
+    z-index: 1;
+}
+/* BANNER CONTENT: Text positioned left, vertically centered 
+.category-grid-section .banner-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Typography 
+.category-grid-section .banner-subtitle {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 8px 0;
+}
+
+.category-grid-section .banner-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 18px 0;
+    line-height: 1.3;
+}
+
+.category-grid-section .banner-button {
+    display: inline-block;
+    padding: 10px 24px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    background-color: transparent;
+    border: 2px solid #FFFFFF;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.category-grid-section .banner-button:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+======================================== */
+
+/* Tablet: 2 Columns 
+@media screen and (max-width: 1024px) {
+    .category-grid-section .container .category-grid,
+    .category-grid-section .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .category-grid-section .category-banner-item {
+        height: 240px;
+        min-height: 240px;
+    }
+}
+
+/* Mobile: 1 Column 
+@media screen and (max-width: 767px) {
+    .category-grid-section {
+        padding: 30px 0;
+    }
+    
+    .category-grid-section .container .category-grid,
+    .category-grid-section .category-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .category-grid-section .category-banner-item {
+        height: 220px;
+        min-height: 220px;
+    }
+    
+    .category-grid-section .banner-content {
+        padding: 20px;
+    }
+    
+    .category-grid-section .banner-title {
+        font-size: 18px;
     }
 }
