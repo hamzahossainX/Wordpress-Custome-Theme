@@ -2372,6 +2372,9 @@ del .woocommerce-Price-amount {
     background: transparent;
     border: 1.5px solid #1a1a1a;
     text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
