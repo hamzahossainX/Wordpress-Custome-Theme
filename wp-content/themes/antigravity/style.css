@@ -2433,3 +2433,282 @@ del .woocommerce-Price-amount {
         padding: 13px 36px;
     }
 }
+
+
+/* ============================================================
+   SITE FOOTER — Luxury Dark Style
+============================================================ */
+
+.site-footer {
+    background-color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: 'Inter', sans-serif;
+    position: relative;
+}
+
+/* Subtle top accent line */
+.site-footer::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px 0;
+}
+
+/* ── 4-column grid ── */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+    gap: 48px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Column 1 — Brand ── */
+.footer-logo {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    line-height: 1;
+}
+
+.footer-tagline {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 28px;
+}
+
+/* Social icons */
+.footer-social {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.footer-social-link svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.footer-social-link:hover {
+    background: #ffffff;
+    color: #1a1a1a;
+    border-color: #ffffff;
+}
+
+/* ── Columns 2 & 3 — Nav lists ── */
+.footer-col-heading {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 22px;
+}
+
+.footer-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Left-slide underline animation */
+.footer-nav-link {
+    position: relative;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    padding-bottom: 2px;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.footer-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.7);
+    transition: width 0.3s ease;
+}
+
+.footer-nav-link:hover {
+    color: #ffffff;
+}
+
+.footer-nav-link:hover::after {
+    width: 100%;
+}
+
+/* ── Column 4 — Newsletter ── */
+.footer-newsletter-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.7;
+    margin: 0 0 20px;
+}
+
+.footer-newsletter-fields {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 2px;
+}
+
+.footer-newsletter-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff;
+    padding: 8px 12px 8px 0;
+    caret-color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-newsletter-btn {
+    background: #ffffff;
+    color: #1a1a1a;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 9px 18px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.footer-newsletter-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* ── Bottom bar ── */
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.32);
+    letter-spacing: 0.3px;
+}
+
+.footer-heart {
+    color: rgba(220, 60, 60, 0.75);
+    font-style: normal;
+}
+
+/* ── Responsive ── */
+
+/* Tablet: 2 columns */
+@media screen and (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 32px;
+    }
+}
+
+/* Mobile: 1 column, centered */
+@media screen and (max-width: 600px) {
+    .footer-inner {
+        padding: 56px 20px 0;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: center;
+    }
+
+    .footer-logo {
+        display: block;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .footer-nav-link::after {
+        /* underline starts from center on mobile */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-nav-link:hover::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-newsletter-fields {
+        flex-direction: column;
+        border-bottom: none;
+        gap: 10px;
+    }
+
+    .footer-newsletter-input {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 8px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-newsletter-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 11px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        padding: 20px 0;
+    }
+}
