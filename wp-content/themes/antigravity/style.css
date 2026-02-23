@@ -2918,3 +2918,1086 @@ del .woocommerce-Price-amount {
         transform: translateY(0);
     }
 }
+
+
+/* ============================================================
+   AUTH PAGES — Login / Register / Forgot Password
+   (Minimal Luxury / AMIRA Brand Style)
+============================================================ */
+
+/* ---- Page wrapper ---- */
+.auth-page {
+    min-height: 100vh;
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ---- Card ---- */
+.auth-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 48px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    padding: 48px 44px 40px;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+}
+
+/* ---- Logo ---- */
+.auth-logo-wrap {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.auth-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #1a1a1a;
+    text-decoration: none;
+    text-transform: uppercase;
+    line-height: 1;
+    display: inline-block;
+    transition: opacity 0.2s ease;
+}
+
+.auth-logo:hover {
+    opacity: 0.7;
+}
+
+/* ---- Heading & Subtitle ---- */
+.auth-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 20px 0 4px;
+    line-height: 1.2;
+}
+
+.auth-subtitle {
+    font-size: 13px;
+    font-weight: 400;
+    color: #999;
+    text-align: center;
+    margin: 0 0 32px;
+    letter-spacing: 0.01em;
+}
+
+/* ---- Form ---- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ---- Field Group ---- */
+.auth-field-group {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.auth-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 8px;
+}
+
+/* ---- Input — border-bottom only ---- */
+.auth-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #e0e0e0;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #1a1a1a;
+    padding: 8px 40px 8px 0;
+    /* right room for toggle */
+    transition: border-color 0.25s ease;
+    box-sizing: border-box;
+}
+
+.auth-input::placeholder {
+    color: #ccc;
+    font-weight: 300;
+}
+
+.auth-input:focus {
+    border-bottom-color: #1a1a1a;
+}
+
+.auth-input.input-error {
+    border-bottom-color: #e74c3c;
+}
+
+.auth-input.input-success {
+    border-bottom-color: #27ae60;
+}
+
+/* ---- Password wrapper (for toggle icon) ---- */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper .auth-input {
+    padding-right: 40px;
+}
+
+/* ---- Show/Hide toggle ---- */
+.password-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+.password-toggle:hover {
+    color: #1a1a1a;
+}
+
+.eye-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* ---- Password Strength ---- */
+.strength-bar-wrap {
+    height: 3px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+    display: none;
+    /* shown via JS when user types */
+}
+
+.strength-bar-wrap.visible {
+    display: block;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-bar.weak {
+    width: 33%;
+    background-color: #e74c3c;
+}
+
+.strength-bar.medium {
+    width: 66%;
+    background-color: #f39c12;
+}
+
+.strength-bar.strong {
+    width: 100%;
+    background-color: #27ae60;
+}
+
+.strength-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #bbb;
+    margin-top: 5px;
+    height: 14px;
+}
+
+/* ---- Field Feedback (inline) ---- */
+.field-feedback,
+.field-error {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    margin-top: 5px;
+    min-height: 16px;
+    line-height: 1.4;
+}
+
+.field-feedback.error,
+.field-error.error {
+    color: #e74c3c;
+}
+
+.field-feedback.success {
+    color: #27ae60;
+}
+
+/* ---- Remember Me row ---- */
+.auth-remember-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.auth-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Hide default checkbox */
+.auth-checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Custom checkbox */
+.auth-checkbox-custom {
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid #ccc;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.auth-checkbox-label input[type="checkbox"]:checked+.auth-checkbox-custom {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+}
+
+.auth-checkbox-label input[type="checkbox"]:checked+.auth-checkbox-custom::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    width: 4px;
+    height: 7px;
+    border: 1.5px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+.auth-checkbox-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #888;
+}
+
+/* ---- Small Link ---- */
+.auth-link-small {
+    font-size: 11px;
+    font-weight: 400;
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.auth-link-small:hover {
+    color: #1a1a1a;
+}
+
+/* ---- Global Message (error/success banner) ---- */
+.auth-message {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0;
+    margin-bottom: 0;
+    border-radius: 4px;
+    line-height: 1.5;
+    min-height: 0;
+    transition: all 0.3s ease;
+}
+
+.auth-message:not(:empty) {
+    padding: 10px 14px;
+    margin-bottom: 16px;
+}
+
+.auth-error {
+    background-color: #fdf2f2;
+    color: #e74c3c;
+    border-left: 3px solid #e74c3c;
+}
+
+.auth-success {
+    background-color: #f0faf5;
+    color: #27ae60;
+    border-left: 3px solid #27ae60;
+}
+
+/* ---- Submit Button ---- */
+.auth-button {
+    width: 100%;
+    padding: 14px 24px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    border-radius: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease, transform 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.auth-button:hover {
+    background: #333333;
+}
+
+.auth-button:active {
+    transform: scale(0.99);
+}
+
+.auth-button:disabled {
+    background: #888;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loading spinner inside button */
+.btn-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+.auth-button.loading .btn-spinner {
+    display: inline-block;
+}
+
+.auth-button.loading .btn-text {
+    opacity: 0.7;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---- Footer Link ---- */
+.auth-footer-link {
+    text-align: center;
+    margin: 24px 0 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: #aaa;
+}
+
+.auth-link {
+    color: #1a1a1a;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.auth-link:hover {
+    border-bottom-color: #1a1a1a;
+}
+
+
+/* ============================================================
+   HEADER — Account Section (.header-account)
+   Scoped to header so it never bleeds into other sections.
+   Works for both the logged-in dropdown and the logged-out link.
+============================================================ */
+
+/* ---- Wrapper: establishes the positioning context ---- */
+header .header-account {
+    position: relative;
+    /* dropdown positioned against this */
+    display: flex;
+    align-items: center;
+}
+
+/* ---- Logged-out: Login/Register link ---- */
+header .header-account .login-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: #242424;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+header .header-account .login-link:hover {
+    color: #000;
+}
+
+header .header-account .login-link .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* ---- Logged-in: Trigger button ---- */
+header .header-account .user-account-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #242424;
+    letter-spacing: 0.04em;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+header .header-account .user-account-trigger:hover {
+    color: #000;
+}
+
+header .header-account .user-account-trigger .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+header .header-account .dropdown-chevron {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+/* Chevron flips when open */
+header .header-account.open .dropdown-chevron,
+header .header-account:focus-within .dropdown-chevron {
+    transform: rotate(180deg);
+}
+
+/* ---- Dropdown panel — hidden by default ---- */
+header .header-account .user-dropdown {
+    position: absolute;
+    top: calc(100% + 16px);
+    /* appears just below the trigger */
+    right: 0;
+    min-width: 160px;
+    background: #ffffff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    z-index: 9999;
+    /* above everything */
+    overflow: hidden;
+    /* Hidden state */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    pointer-events: none;
+}
+
+/* Visible on hover (desktop) OR when .open class added (JS) */
+header .header-account:hover .user-dropdown,
+header .header-account.open .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Small caret pointer */
+header .header-account .user-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 16px;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-left: 1px solid rgba(0, 0, 0, 0.07);
+    border-top: 1px solid rgba(0, 0, 0, 0.07);
+    transform: rotate(45deg);
+}
+
+/* ---- Dropdown items ---- */
+header .header-account .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #444;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+header .header-account .dropdown-item .dashicons {
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+    color: #aaa;
+    transition: color 0.15s ease;
+    flex-shrink: 0;
+}
+
+header .header-account .dropdown-item:hover {
+    background: #f8f8f8;
+    color: #1a1a1a;
+}
+
+header .header-account .dropdown-item:hover .dashicons {
+    color: #1a1a1a;
+}
+
+header .header-account .dropdown-item+.dropdown-item {
+    border-top: 1px solid #f2f2f2;
+}
+
+/* Logout: red on hover */
+header .header-account .dropdown-logout:hover {
+    color: #e74c3c;
+}
+
+header .header-account .dropdown-logout:hover .dashicons {
+    color: #e74c3c;
+}
+
+
+/* ============================================================
+   AUTH PAGES — RESPONSIVE
+============================================================ */
+
+@media screen and (max-width: 480px) {
+    .auth-card {
+        padding: 36px 24px 32px;
+        border-radius: 8px;
+    }
+
+    .auth-logo {
+        font-size: 26px;
+    }
+
+    .auth-title {
+        font-size: 21px;
+    }
+
+    .auth-remember-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+/* ============================================================
+   HEADER ACCOUNT — MOBILE (max-width: 768px)
+   On mobile the whole account section (dropdown trigger + link)
+   is hidden because the hamburger nav takes over.
+   Only the icon is kept visible; text + chevron are hidden.
+============================================================ */
+@media screen and (max-width: 768px) {
+
+    /* Hide dropdown trigger text + chevron — icon only */
+    header .header-account .user-first-name,
+    header .header-account .dropdown-chevron {
+        display: none;
+    }
+
+    /* Ensure dropdown doesn't appear on mobile (tap triggers are unreliable) */
+    header .header-account .user-dropdown {
+        display: none !important;
+    }
+
+    /* Hide the "Login / Register" text on mobile, keep icon */
+    header .header-account .login-link-text {
+        display: none;
+    }
+}
+
+
+/* ============================================================
+   AUTH PAGES — Login / Register / Forgot Password
+   Shared card layout and field styles
+============================================================ */
+
+/* ---- Page wrapper ---- */
+.auth-page {
+    min-height: 100vh;
+    background: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* ---- Card ---- */
+.auth-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    padding: 48px 44px 40px;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.07), 0 1px 8px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+/* ---- AMIRA logo inside auth card ---- */
+.auth-logo-wrap {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.auth-logo {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: #1a1a1a;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* ---- Titles ---- */
+.auth-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 0 0 6px;
+    letter-spacing: 0.04em;
+}
+
+.auth-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #888;
+    text-align: center;
+    margin: 0 0 32px;
+    letter-spacing: 0.02em;
+}
+
+/* ---- Form ---- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ---- Field group ---- */
+.auth-field-group {
+    margin-bottom: 22px;
+}
+
+.auth-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #999;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* ---- Inputs: border-bottom only ---- */
+.auth-input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #1a1a1a;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s ease;
+    border-radius: 0;
+}
+
+.auth-input::placeholder {
+    color: #ccc;
+    font-weight: 300;
+}
+
+.auth-input:focus {
+    border-bottom-color: #1a1a1a;
+}
+
+/* Error / success state on inputs */
+.auth-input.input-error {
+    border-bottom-color: #e74c3c;
+}
+
+.auth-input.input-success {
+    border-bottom-color: #27ae60;
+}
+
+/* ---- Password wrapper (input + eye toggle) ---- */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper .auth-input {
+    flex: 1;
+    padding-right: 36px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: #1a1a1a;
+}
+
+.eye-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+/* ---- Inline field feedback text ---- */
+.field-feedback {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    margin-top: 5px;
+    min-height: 14px;
+    transition: color 0.2s ease;
+}
+
+.field-feedback.error {
+    color: #e74c3c;
+}
+
+.field-feedback.success {
+    color: #27ae60;
+}
+
+/* ---- Password strength bar ---- */
+.strength-bar-wrap {
+    height: 3px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.strength-bar-wrap.visible {
+    opacity: 1;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+    transition: width 0.4s ease, background-color 0.3s ease;
+}
+
+.strength-bar.weak {
+    width: 33%;
+    background: #e74c3c;
+}
+
+.strength-bar.medium {
+    width: 66%;
+    background: #f39c12;
+}
+
+.strength-bar.strong {
+    width: 100%;
+    background: #27ae60;
+}
+
+.strength-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #aaa;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* ---- Remember Me row (login page) ---- */
+.auth-remember-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    margin-top: -4px;
+}
+
+.auth-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.auth-checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.auth-checkbox-custom {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    display: inline-block;
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.auth-checkbox-label input:checked~.auth-checkbox-custom {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+}
+
+.auth-checkbox-label input:checked~.auth-checkbox-custom::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 4px;
+    height: 8px;
+    border: 1.5px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+.auth-checkbox-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #666;
+}
+
+.auth-link-small {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #888;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.auth-link-small:hover {
+    color: #1a1a1a;
+    border-bottom-color: #1a1a1a;
+}
+
+/* ---- Global auth message (error / success) ---- */
+.auth-message {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    min-height: 20px;
+    padding: 0;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.auth-message.auth-error {
+    color: #e74c3c;
+}
+
+.auth-message.auth-success {
+    color: #27ae60;
+}
+
+/* ---- Submit button ---- */
+.auth-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 24px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.25s ease, transform 0.15s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-button:hover:not(:disabled) {
+    background: #333333;
+}
+
+.auth-button:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.auth-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Spinner (shown via .loading class on button) */
+.btn-spinner {
+    display: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: btn-spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+.auth-button.loading .btn-spinner {
+    display: block;
+}
+
+.auth-button.loading .btn-text {
+    opacity: 0.6;
+}
+
+@keyframes btn-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---- Footer link (Login ↔ Register) ---- */
+.auth-footer-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #888;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 0;
+}
+
+.auth-link {
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    font-weight: 500;
+    transition: border-color 0.2s ease;
+}
+
+.auth-link:hover {
+    border-bottom-color: #1a1a1a;
+}
+
+
+/* ============================================================
+   AUTH PAGES — RESPONSIVE (mobile)
+============================================================ */
+
+@media screen and (max-width: 480px) {
+    .auth-page {
+        padding: 40px 16px;
+        align-items: flex-start;
+    }
+
+    .auth-card {
+        padding: 36px 24px 32px;
+        border-radius: 8px;
+    }
+
+    .auth-logo {
+        font-size: 26px;
+    }
+
+    .auth-title {
+        font-size: 21px;
+    }
+
+    .auth-remember-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
