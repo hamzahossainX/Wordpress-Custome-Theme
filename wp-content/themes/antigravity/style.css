@@ -137,7 +137,7 @@ a:hover {
     border-bottom: 1px solid #ECECEC;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 9999;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
@@ -544,21 +544,77 @@ article:last-child {
    NAVBAR — Transparent to Solid on Scroll
 ======================================== */
 
+/* ---- Fixed header: overrides the sticky above ---- */
 .site-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 9999;
-    /* Transparent on load */
     background-color: transparent;
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    border-bottom: none;
+    box-shadow: none;
+    /* Smooth transition for ALL visual properties */
+    transition: background-color 0.35s ease,
+        box-shadow 0.35s ease,
+        color 0.35s ease;
 }
 
-/* Solid white when user scrolls down (class added by main.js) */
+/* Solid white + dark text when scrolled (JS adds .scrolled) */
 .site-header.scrolled {
-    background-color: #FFFFFF;
+    background-color: #FFFFFF !important;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid #ECECEC;
+}
+
+/* Restore dark text on all nav elements once scrolled */
+.site-header.scrolled .primary-menu a,
+.site-header.scrolled .logo-text,
+.site-header.scrolled .user-first-name,
+.site-header.scrolled .tool-text,
+.site-header.scrolled .header-tools a:not(.dropdown-item),
+.site-header.scrolled .dashicons:not(.user-dropdown .dashicons) {
+    color: #242424;
+}
+
+.site-header.scrolled .tool-link .dashicons,
+.site-header.scrolled .search-link,
+.site-header.scrolled .wishlist-link,
+.site-header.scrolled .cart-link,
+.site-header.scrolled .search-link .dashicons,
+.site-header.scrolled .wishlist-link .dashicons,
+.site-header.scrolled .cart-link .dashicons {
+    color: #242424;
+    filter: none;
+}
+
+/* -------------------------------------------------------
+   INNER PAGES (everything except homepage / front-page)
+   Header is ALWAYS solid white — no transparent phase
+   Body gets padding-top to clear the fixed header bar
+------------------------------------------------------- */
+body:not(.home):not(.page-template-front-page) .site-header,
+body.page:not(.home) .site-header,
+body.woocommerce .site-header,
+body.woocommerce-page .site-header,
+body.single .site-header,
+body.archive .site-header,
+body.blog .site-header,
+body.search-results .site-header,
+body.error404 .site-header {
+    background-color: #FFFFFF !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid #ECECEC !important;
+}
+
+/* Body padding-top so fixed header doesn't overlap page content */
+body:not(.home) {
+    padding-top: 80px;
+}
+
+/* Home page: no padding — hero slides under the transparent header */
+body.home {
+    padding-top: 0;
 }
 
 /* Nav links — slightly increased letter spacing for luxury feel */
@@ -567,20 +623,82 @@ article:last-child {
     transition: color 0.3s ease;
 }
 
-/* Keep nav links white on transparent header, dark once scrolled */
-/* NOTE: .dropdown-item excluded — dropdown always uses dark text */
-.site-header:not(.scrolled) .primary-menu a,
-.site-header:not(.scrolled) .logo-text,
-.site-header:not(.scrolled) .header-tools a:not(.dropdown-item),
-.site-header:not(.scrolled) .tool-text,
-.site-header:not(.scrolled) .dashicons:not(.user-dropdown .dashicons) {
-    color: #FFFFFF;
+/* ============================================================
+   HOMEPAGE — TRANSPARENT HEADER
+   Exact selectors confirmed from header.php inspection:
+   #site-header · .primary-menu a · .logo-text · .dashicons
+   .cart-price · .user-first-name · .dropdown-chevron
+   Scoped to body.home — inner pages completely unaffected.
+============================================================ */
+
+/* Smooth colour + filter transition on all nav elements */
+#site-header .primary-menu a,
+#site-header .logo-text,
+#site-header .dashicons,
+#site-header .cart-price,
+#site-header .user-first-name,
+#site-header .login-link-text,
+#site-header .mobile-menu-toggle,
+#site-header .dropdown-chevron {
+    transition: color 0.35s ease, filter 0.35s ease;
 }
 
-.site-header:not(.scrolled) .tool-link:hover,
-.site-header:not(.scrolled) .primary-menu a:hover {
-    color: rgba(255, 255, 255, 0.7);
+/* ---- TRANSPARENT PHASE (homepage, before scroll) ---- */
+body.home #site-header:not(.scrolled) .primary-menu a,
+body.home #site-header:not(.scrolled) .logo-text,
+body.home #site-header:not(.scrolled) .logo-link,
+body.home #site-header:not(.scrolled) .dashicons,
+body.home #site-header:not(.scrolled) .cart-price,
+body.home #site-header:not(.scrolled) .user-first-name,
+body.home #site-header:not(.scrolled) .login-link-text,
+body.home #site-header:not(.scrolled) .user-account-trigger,
+body.home #site-header:not(.scrolled) .mobile-menu-toggle {
+    color: #FFFFFF !important;
 }
+
+/* SVG chevron uses stroke="currentColor" — needs filter, not color */
+body.home #site-header:not(.scrolled) .dropdown-chevron {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Hover: slightly dimmed white */
+body.home #site-header:not(.scrolled) .primary-menu a:hover,
+body.home #site-header:not(.scrolled) .tool-link:hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ---- SCROLLED PHASE (white background, dark text) ---- */
+body.home #site-header.scrolled .primary-menu a,
+body.home #site-header.scrolled .logo-text,
+body.home #site-header.scrolled .logo-link,
+body.home #site-header.scrolled .dashicons,
+body.home #site-header.scrolled .cart-price,
+body.home #site-header.scrolled .user-first-name,
+body.home #site-header.scrolled .login-link-text,
+body.home #site-header.scrolled .user-account-trigger,
+body.home #site-header.scrolled .mobile-menu-toggle {
+    color: #242424 !important;
+}
+
+body.home #site-header.scrolled .dropdown-chevron {
+    filter: none !important;
+}
+
+body.home #site-header.scrolled .primary-menu a:hover,
+body.home #site-header.scrolled .tool-link:hover {
+    color: #000000 !important;
+}
+
+/* Homepage: hero goes full-screen under the transparent header */
+body.home {
+    padding-top: 0 !important;
+}
+
+
+
+
+
+
 
 /* Dropdown items ALWAYS dark — never inherit the white header colour */
 .site-header .user-dropdown .dropdown-item,
@@ -4038,4 +4156,49 @@ header .header-account .dropdown-logout:hover .dashicons {
         align-items: flex-start;
         gap: 12px;
     }
+}
+
+/* ============================================================
+   HERO TOP GRADIENT
+   Dark-to-transparent veil at the top of the hero slider.
+   Two approaches — whichever is present works:
+     1. CSS ::before (no extra HTML required)
+     2. .hero-top-gradient div (already in front-page.php)
+   Makes white header text readable over ANY hero image.
+============================================================ */
+
+/* ::before approach — pure CSS, nothing to add to PHP */
+.hero-slider-section {
+    position: relative;
+    /* required for absolute children */
+}
+
+.hero-slider-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.55) 0%,
+            rgba(0, 0, 0, 0.18) 55%,
+            transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* div fallback — matches the .hero-top-gradient element in front-page.php */
+.hero-top-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.55) 0%,
+            rgba(0, 0, 0, 0.18) 55%,
+            transparent 100%);
+    z-index: 2;
+    pointer-events: none;
 }
