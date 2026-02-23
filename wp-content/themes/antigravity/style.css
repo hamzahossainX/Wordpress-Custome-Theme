@@ -207,6 +207,24 @@ a:hover {
     color: #000000;
 }
 
+/* Hide Login / Register / Forgot Password if they end up in the nav menu */
+.primary-menu .menu-item a[href*="/login"],
+.primary-menu .menu-item a[href*="/register"],
+.primary-menu .menu-item a[href*="/forgot-password"],
+.primary-menu .menu-item-login,
+.primary-menu .menu-item-register,
+.primary-menu .menu-item-forgot-password {
+    display: none !important;
+}
+
+/* Hide the li wrapper too so it takes zero space */
+.primary-menu li:has(a[href*="/login"]),
+.primary-menu li:has(a[href*="/register"]),
+.primary-menu li:has(a[href*="/forgot-password"]) {
+    display: none !important;
+}
+
+
 /* ========================================
    CENTER SECTION: Brand Logo
    Mathematically centered due to flex: 1 on both sides

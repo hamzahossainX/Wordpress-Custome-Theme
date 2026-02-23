@@ -383,7 +383,7 @@
                     if (res.success) {
                         showMessage(msgEl, res.data.message, 'success');
                         setTimeout(function () {
-                            window.location.href = res.data.redirectUrl || (window.amiraAjax || {}).myAccountUrl || '/';
+                            window.location.href = res.data.redirectUrl || (window.amiraAjax || {}).homeUrl || '/';
                         }, 700);
                     } else {
                         showMessage(msgEl, (res.data && res.data.message) || 'An error occurred.', 'error');
