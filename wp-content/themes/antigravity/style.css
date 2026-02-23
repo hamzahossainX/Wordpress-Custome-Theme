@@ -568,17 +568,37 @@ article:last-child {
 }
 
 /* Keep nav links white on transparent header, dark once scrolled */
+/* NOTE: .dropdown-item excluded — dropdown always uses dark text */
 .site-header:not(.scrolled) .primary-menu a,
 .site-header:not(.scrolled) .logo-text,
-.site-header:not(.scrolled) .header-tools a,
+.site-header:not(.scrolled) .header-tools a:not(.dropdown-item),
 .site-header:not(.scrolled) .tool-text,
-.site-header:not(.scrolled) .dashicons {
+.site-header:not(.scrolled) .dashicons:not(.user-dropdown .dashicons) {
     color: #FFFFFF;
 }
 
 .site-header:not(.scrolled) .tool-link:hover,
 .site-header:not(.scrolled) .primary-menu a:hover {
     color: rgba(255, 255, 255, 0.7);
+}
+
+/* Dropdown items ALWAYS dark — never inherit the white header colour */
+.site-header .user-dropdown .dropdown-item,
+.site-header .user-dropdown a.dropdown-item {
+    color: #444444 !important;
+}
+
+.site-header .user-dropdown .dropdown-item .dashicons {
+    color: #aaaaaa !important;
+}
+
+.site-header .user-dropdown .dropdown-item:hover {
+    background: #f8f8f8;
+    color: #1a1a1a !important;
+}
+
+.site-header .user-dropdown .dropdown-item:hover .dashicons {
+    color: #1a1a1a !important;
 }
 
 /* ========================================
