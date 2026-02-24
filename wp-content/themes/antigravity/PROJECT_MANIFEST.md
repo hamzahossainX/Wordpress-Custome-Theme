@@ -66,8 +66,8 @@
 - **Start XAMPP (CLI):** `sudo /opt/lampp/lampp start`
 - **Start XAMPP (GUI):** `sudo /opt/lampp/manager-linux-x64.run`
 - **Stop XAMPP:** `sudo /opt/lampp/lampp stop`
-- **Site URL:** `http://localhost/amira`
-- **Admin URL:** `http://localhost/amira/wp-admin`
+- **Site URL:** `https://dewdroplive.shop`
+- **Admin URL:** `https://dewdroplive.shop/wp-admin`
 
 ## 9. Version Control & Git Strategy
 **Repo URL:** `https://github.com/hamzahossainX/Wordpress-Custome-Theme.git`
