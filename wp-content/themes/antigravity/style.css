@@ -4513,62 +4513,215 @@ header .header-account .dropdown-logout:hover .dashicons {
     width: 24px !important;
 }
 
-/* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 1100px) {
+/* ================================================================
+   SHOP — RESPONSIVE BREAKPOINTS
+================================================================ */
 
-    .woocommerce ul.products,
-    .woocommerce-page ul.products {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 20px !important;
-    }
-}
+/* ── Tablet: 577px – 992px → 3 columns ───────────────────── */
+@media (min-width: 577px) and (max-width: 992px) {
 
-@media (max-width: 992px) {
     .amira-shop-wrapper {
         padding: 40px 24px 60px;
     }
 
     .woocommerce ul.products,
     .woocommerce-page ul.products {
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: repeat(3, 1fr) !important;
         gap: 16px !important;
     }
-}
 
-/* Mobile: 2 columns (intentional — 2 looks better for mobile shop) */
-@media (max-width: 576px) {
-    .amira-shop-wrapper {
-        padding: 28px 14px 48px;
+    /* Card */
+    .amira-card {
+        border-radius: 6px;
     }
 
-    .woocommerce ul.products,
-    .woocommerce-page ul.products {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-    }
-
+    /* Image */
     .amira-card__image-link img {
-        padding: 12px !important;
+        padding: 14px !important;
     }
 
-    .amira-card__info {
-        padding: 10px 10px 0;
-    }
-
+    /* Title */
     .amira-card__title {
-        font-size: 14px !important;
+        font-size: 15px !important;
+        padding: 10px 10px 3px !important;
     }
 
+    /* Price */
     .amira-card__price {
         font-size: 13px !important;
+        margin: 0 0 10px !important;
     }
 
+    /* Button — always visible on tablet (tap not hover) */
     .amira-card__btn {
-        font-size: 9px !important;
+        transform: translateY(0) !important;
+        font-size: 10px !important;
         padding: 11px 0 !important;
-        letter-spacing: 0.1em !important;
+        letter-spacing: 0.12em !important;
+    }
+
+    /* Pagination */
+    .woocommerce-pagination ul li a.page-numbers,
+    .woocommerce-pagination ul li span.page-numbers,
+    .amira-shop-wrapper .woocommerce-pagination ul li a,
+    .amira-shop-wrapper .woocommerce-pagination ul li span {
+        width: 36px !important;
+        height: 36px !important;
     }
 }
+
+/* ── Mobile: ≤576px → 2 columns ──────────────────────────── */
+@media (max-width: 576px) {
+
+    /* Wrapper — 16px side padding, no overflow */
+    .amira-shop-wrapper {
+        padding: 24px 0 40px;
+    }
+
+    .amira-shop-wrapper .woocommerce {
+        padding: 0 16px;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    /* 2-column grid, 12px gap */
+    .woocommerce ul.products,
+    .woocommerce ul.products.columns-4,
+    .woocommerce ul.products.columns-3,
+    .woocommerce ul.products.columns-2,
+    .woocommerce-page ul.products,
+    .woocommerce-page ul.products.columns-4,
+    .woocommerce-page ul.products.columns-3,
+    .woocommerce-page ul.products.columns-2 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    /* Cards equal height via grid stretch */
+    .woocommerce ul.products li.product,
+    .woocommerce-page ul.products li.product {
+        align-self: stretch !important;
+    }
+
+    /* Card shell */
+    .amira-card {
+        border-radius: 8px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+        border: none !important;
+        overflow: hidden !important;
+    }
+
+    /* Image: square, contain, grey bg, compact padding */
+    .amira-card__image-link img {
+        aspect-ratio: 1 / 1 !important;
+        object-fit: contain !important;
+        background: #f5f5f5 !important;
+        padding: 10px !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Info block */
+    .amira-card__info {
+        padding: 8px 8px 0 !important;
+    }
+
+    /* Product name — compact, no overflow */
+    .amira-card__title {
+        font-family: 'Cormorant Garamond', Georgia, serif !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        padding: 0 !important;
+        margin: 0 0 4px !important;
+        /* Clamp to one line */
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    /* Price — Inter 12px, both prices on one line */
+    .amira-card__price {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 12px !important;
+        margin: 0 0 8px !important;
+        padding: 0 !important;
+        white-space: nowrap !important;
+        /* prevent multi-line price */
+        overflow: hidden !important;
+    }
+
+    .amira-card__price del {
+        color: #aaaaaa !important;
+        font-size: 11px !important;
+    }
+
+    .amira-card__price ins {
+        font-weight: 700 !important;
+        font-size: 12px !important;
+        color: #1a1a1a !important;
+        text-decoration: none !important;
+    }
+
+    /* Add to Cart — always visible on mobile (no hover on touch) */
+    .amira-card__btn {
+        transform: translateY(0) !important;
+        /* always visible */
+        font-size: 10px !important;
+        letter-spacing: 0.1em !important;
+        padding: 10px 0 !important;
+        width: 100% !important;
+        display: block !important;
+    }
+
+    /* Stack result-count and sort dropdown vertically — no overlap */
+    .woocommerce-result-count,
+    .amira-shop-wrapper .woocommerce-result-count,
+    .woocommerce-ordering,
+    .amira-shop-wrapper .woocommerce-ordering {
+        float: none !important;
+        width: 100% !important;
+        text-align: center !important;
+        margin: 4px 0 !important;
+        display: block !important;
+    }
+
+    .woocommerce-result-count,
+    .amira-shop-wrapper .woocommerce-result-count {
+        font-size: 12px !important;
+        color: #999 !important;
+    }
+
+    .woocommerce-ordering select,
+    .amira-shop-wrapper .woocommerce-ordering select {
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    /* Pagination — 32×32 compact squares */
+    .woocommerce-pagination,
+    .amira-shop-wrapper .woocommerce-pagination {
+        margin-top: 40px !important;
+        margin-bottom: 24px !important;
+    }
+
+    .woocommerce-pagination ul li a.page-numbers,
+    .woocommerce-pagination ul li span.page-numbers,
+    .amira-shop-wrapper .woocommerce-pagination ul li a,
+    .amira-shop-wrapper .woocommerce-pagination ul li span {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 12px !important;
+    }
+
+    .woocommerce-pagination ul,
+    .amira-shop-wrapper .woocommerce-pagination ul {
+        gap: 4px !important;
+    }
+
+
+}
+
+/* end @media (max-width: 576px) */
 
 /* ── Skeleton Loading ── */
 .amira-skeleton {
