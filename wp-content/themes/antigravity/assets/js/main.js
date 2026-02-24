@@ -898,4 +898,36 @@
     });
 })();
 
+/* ============================================================
+   SINGLE PRODUCT PAGE INTERACTIONS
+============================================================ */
+document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('click', function (e) {
+        // Plus button
+        if (e.target.classList.contains('qty-plus') || e.target.closest('.qty-plus')) {
+            const input = e.target.closest('.quantity').querySelector('input.qty');
+            if (input) {
+                const max = parseInt(input.getAttribute('max')) || 999;
+                const current = parseInt(input.value) || 1;
+                if (current < max) {
+                    input.value = current + 1;
+                    input.dispatchEvent(new Event('change'));
+                }
+            }
+        }
+        // Minus button
+        if (e.target.classList.contains('qty-minus') || e.target.closest('.qty-minus')) {
+            const input = e.target.closest('.quantity').querySelector('input.qty');
+            if (input) {
+                const min = parseInt(input.getAttribute('min')) || 1;
+                const current = parseInt(input.value) || 1;
+                if (current > min) {
+                    input.value = current - 1;
+                    input.dispatchEvent(new Event('change'));
+                }
+            }
+        }
+    });
+});
+
 
