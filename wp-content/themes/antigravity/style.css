@@ -644,6 +644,11 @@ body.home {
 }
 
 /* ---- TRANSPARENT PHASE (homepage, before scroll) ---- */
+/* Hero image is light — always show solid white header with dark text */
+body.home #site-header:not(.scrolled) {
+    background-color: #ffffff !important;
+}
+
 body.home #site-header:not(.scrolled) .primary-menu a,
 body.home #site-header:not(.scrolled) .logo-text,
 body.home #site-header:not(.scrolled) .logo-link,
@@ -653,18 +658,19 @@ body.home #site-header:not(.scrolled) .user-first-name,
 body.home #site-header:not(.scrolled) .login-link-text,
 body.home #site-header:not(.scrolled) .user-account-trigger,
 body.home #site-header:not(.scrolled) .mobile-menu-toggle {
-    color: #FFFFFF !important;
+    color: #1a1a1a !important;
+    filter: none !important;
 }
 
-/* SVG chevron uses stroke="currentColor" — needs filter, not color */
+/* SVG chevron — no invert needed on light header */
 body.home #site-header:not(.scrolled) .dropdown-chevron {
-    filter: brightness(0) invert(1) !important;
+    filter: none !important;
 }
 
-/* Hover: slightly dimmed white */
+/* Hover: gold accent */
 body.home #site-header:not(.scrolled) .primary-menu a:hover,
 body.home #site-header:not(.scrolled) .tool-link:hover {
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: #c9a96e !important;
 }
 
 /* ---- SCROLLED PHASE (white background, dark text) ---- */
@@ -2935,7 +2941,7 @@ del .woocommerce-Price-amount {
 ======================================== */
 @media screen and (max-width: 768px) {
 
-    /* 1. Header height fixed */
+    /* 1. Header height fixed — always solid white on mobile, no transparency */
     .site-header {
         height: 60px;
         position: fixed;
@@ -2943,8 +2949,36 @@ del .woocommerce-Price-amount {
         top: 0;
         left: 0;
         z-index: 1000;
-        background-color: #FFFFFF !important;
-        /* Force solid on mobile */
+        background-color: #ffffff !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Force all header text and icons dark on mobile —
+       overrides the homepage transparent-header white colour */
+    #site-header .primary-menu a,
+    #site-header .logo-text,
+    #site-header .login-link-text,
+    #site-header .cart-price,
+    #site-header .dashicons,
+    #site-header .user-first-name,
+    #site-header .user-account-trigger {
+        color: #1a1a1a !important;
+    }
+
+    /* Override homepage transparent-header white rules on mobile */
+    body.home #site-header:not(.scrolled) {
+        background-color: #ffffff !important;
+    }
+
+    body.home #site-header:not(.scrolled) .mobile-menu-toggle,
+    body.home #site-header:not(.scrolled) .logo-text,
+    body.home #site-header:not(.scrolled) .tool-link,
+    body.home #site-header:not(.scrolled) .dashicons,
+    body.home #site-header:not(.scrolled) .cart-price,
+    body.home #site-header:not(.scrolled) .login-link-text,
+    body.home #site-header:not(.scrolled) .user-first-name {
+        color: #1a1a1a !important;
+        filter: none !important;
     }
 
     .header-container {
