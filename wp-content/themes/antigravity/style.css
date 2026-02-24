@@ -5993,13 +5993,513 @@ mark.order-status {
         border-right: 1px solid #eee !important;
     }
 
-    .woocommerce-MyAccount-content {
-        padding: 20px !important;
-    }
-
     .woocommerce-MyAccount-content table.shop_table,
     .woocommerce-orders-table {
         display: block !important;
         overflow-x: auto !important;
+    }
+}
+
+/* ============================================================
+   AMIRA CHECKOUT — checkout.php
+   Minimal · Luxury · Elegant
+============================================================ */
+
+/* 1. Page Layout */
+.woocommerce-checkout {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.woocommerce-checkout form.checkout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.woocommerce-checkout #customer_details {
+    width: calc(60% - 20px);
+}
+
+.woocommerce-checkout #order_review_heading,
+.woocommerce-checkout #order_review {
+    width: calc(40% - 20px);
+}
+
+/* 2. Section Headings */
+.woocommerce-checkout h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    font-weight: 500;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    position: relative;
+}
+
+.woocommerce-checkout h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: #c9a96e;
+}
+
+/* 3. Form Fields */
+.woocommerce-checkout .form-row {
+    margin-bottom: 20px;
+}
+
+.woocommerce-checkout label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.woocommerce-checkout .input-text,
+.woocommerce-checkout select {
+    width: 100%;
+    padding: 12px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.woocommerce-checkout .input-text:focus,
+.woocommerce-checkout select:focus {
+    border-bottom-color: #1a1a1a;
+}
+
+.woocommerce-checkout .input-text::placeholder {
+    color: #999;
+}
+
+/* Select Box Arrows */
+.woocommerce-checkout .select2-container--default .select2-selection--single,
+.woocommerce-checkout .select2-selection {
+    border: none !important;
+    border-bottom: 1px solid #ddd !important;
+    border-radius: 0 !important;
+    padding: 12px 0 !important;
+    height: auto !important;
+    background-color: transparent !important;
+}
+
+.woocommerce-checkout .select2-container--default .select2-selection--single .select2-selection__arrow {
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+/* 4. Checkboxes */
+.woocommerce-checkout input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
+    transition: all 0.2s ease;
+}
+
+.woocommerce-checkout input[type="checkbox"]:checked {
+    background-color: #c9a96e;
+    border-color: #c9a96e;
+}
+
+.woocommerce-checkout input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* 5. Shipping Options */
+#shipping_method {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+#shipping_method li {
+    border: 1px solid #ddd;
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#shipping_method input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    margin-right: 12px;
+    position: relative;
+    cursor: pointer;
+}
+
+#shipping_method input[type="radio"]:checked {
+    border-color: #c9a96e;
+}
+
+#shipping_method input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #c9a96e;
+    border-radius: 50%;
+}
+
+#shipping_method label {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 500;
+}
+
+#shipping_method .amount {
+    margin-left: auto;
+    color: #c9a96e;
+    font-weight: 600;
+}
+
+/* 6. Payment Options */
+.woocommerce-checkout-payment {
+    background: transparent !important;
+    border-radius: 0 !important;
+}
+
+.woocommerce-checkout-payment ul.payment_methods {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px !important;
+    background: #fff;
+    margin: 0 0 20px 0 !important;
+}
+
+.woocommerce-checkout-payment ul.payment_methods li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.woocommerce-checkout-payment ul.payment_methods li:last-child {
+    border-bottom: none;
+}
+
+.woocommerce-checkout-payment div.payment_box {
+    background-color: #fafafa !important;
+    border: 1px solid #eee !important;
+    color: #666 !important;
+    font-size: 13px !important;
+    padding: 16px !important;
+    border-radius: 4px !important;
+    margin-top: 12px !important;
+}
+
+.woocommerce-checkout-payment div.payment_box::before {
+    display: none !important;
+    /* Hide default triangle */
+}
+
+/* Payment Error Box */
+.woocommerce-error {
+    background: #fff5f5 !important;
+    border: none !important;
+    border-left: 3px solid #e74c3c !important;
+    color: #1a1a1a !important;
+    padding: 16px 20px !important;
+    list-style: none !important;
+    font-size: 13px !important;
+    margin-bottom: 24px !important;
+}
+
+/* 7. Order Summary (Right Side) */
+#order_review {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 24px;
+    position: sticky;
+    top: 120px;
+}
+
+#order_review_heading {
+    display: none;
+    /* Hide default heading, we'll style the table header instead */
+}
+
+.checkout .shop_table {
+    border: none !important;
+    width: 100%;
+}
+
+.checkout .shop_table thead th {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: #1a1a1a;
+    border-bottom: 1px solid #eee !important;
+    padding: 0 0 16px 0 !important;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.checkout .shop_table tbody td,
+.checkout .shop_table tfoot td,
+.checkout .shop_table tfoot th {
+    border-top: none !important;
+    border-bottom: 1px solid #f5f5f5 !important;
+}
+
+/* Product Row */
+.checkout .shop_table .cart_item {
+    display: flex;
+    align-items: center;
+    padding: 16px 0 !important;
+    border-bottom: 1px solid #f5f5f5 !important;
+}
+
+.checkout .shop_table .product-name {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 0 !important;
+}
+
+.checkout .shop_table .product-total {
+    padding: 0 !important;
+    text-align: right;
+}
+
+/* Product Image & Name (Assuming custom snippet or default filters bring image here) */
+.checkout .shop_table .product-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+/* Product Quantity */
+.checkout .shop_table .product-quantity {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 11px;
+    margin-left: 8px;
+    font-weight: normal;
+}
+
+/* Product Price */
+.checkout .shop_table .product-total .amount {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* Totals Area */
+.checkout .shop_table tfoot th {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #666;
+    font-weight: normal;
+    padding: 16px 0 !important;
+}
+
+.checkout .shop_table tfoot td {
+    text-align: right;
+    padding: 16px 0 !important;
+}
+
+.checkout .shop_table tfoot .cart-subtotal .amount,
+.checkout .shop_table tfoot .shipping .amount {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #666;
+}
+
+.checkout .shop_table tfoot .order-total {
+    border-top: 1px solid #eee !important;
+}
+
+.checkout .shop_table tfoot .order-total th,
+.checkout .shop_table tfoot .order-total td {
+    padding-top: 24px !important;
+}
+
+.checkout .shop_table tfoot .order-total th {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+.checkout .shop_table tfoot .order-total .amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* 8. Coupon Section */
+.woocommerce-form-coupon-toggle .showcoupon {
+    color: #1a1a1a;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 24px;
+}
+
+.woocommerce-form-coupon-toggle .showcoupon::after {
+    content: '↓';
+    color: #c9a96e;
+    transition: transform 0.3s ease;
+}
+
+form.checkout_coupon {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 0 !important;
+    border: none !important;
+}
+
+form.checkout_coupon .input-text {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    padding: 12px 0;
+    font-size: 14px;
+}
+
+form.checkout_coupon .button {
+    background: transparent;
+    color: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    padding: 0 24px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 0;
+}
+
+form.checkout_coupon .button:hover {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* 9. Place Order Button */
+#place_order {
+    width: 100%;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 24px;
+    font-weight: 600;
+}
+
+#place_order:hover {
+    background: #333;
+}
+
+/* 10. Terms Text */
+.woocommerce-terms-and-conditions-wrapper {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #999;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.woocommerce-terms-and-conditions-wrapper a {
+    color: #c9a96e;
+    text-decoration: none;
+}
+
+.woocommerce-terms-and-conditions-wrapper a:hover {
+    text-decoration: underline;
+}
+
+/* 11. Responsive */
+@media (max-width: 991px) {
+    .woocommerce-checkout form.checkout {
+        flex-direction: column;
+    }
+
+    .woocommerce-checkout #customer_details,
+    .woocommerce-checkout #order_review_heading,
+    .woocommerce-checkout #order_review {
+        width: 100%;
+    }
+
+    /* Move order summary to top on mobile via Flex order */
+    .woocommerce-checkout form.checkout::before {
+        display: none;
+    }
+
+    #order_review {
+        order: -1;
+        position: static;
+    }
+
+    .woocommerce-checkout-payment {
+        order: 99;
     }
 }
