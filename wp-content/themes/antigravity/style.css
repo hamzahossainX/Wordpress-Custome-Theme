@@ -4333,6 +4333,870 @@ header .header-account .dropdown-logout:hover .dashicons {
 
 
 /* ============================================================
+   AMIRA SINGLE PRODUCT — single-product.php
+   Minimal · Luxury · Elegant
+   Prefix: asp-
+============================================================ */
+
+/* ── Page wrapper ─────────────────────────────────────────── */
+.amira-single-product {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 100px;
+}
+
+/* ── Breadcrumb ───────────────────────────────────────────── */
+.asp-breadcrumb {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: #aaaaaa;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.asp-breadcrumb a {
+    color: #aaaaaa;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.asp-breadcrumb a:hover {
+    color: #1a1a1a;
+}
+
+.asp-bc-sep {
+    color: #cccccc;
+    padding: 0 2px;
+}
+
+.asp-bc-current {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+/* ── 2-column main wrapper ────────────────────────────────── */
+.asp-main-wrapper {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: 60px;
+    align-items: start;
+    margin-bottom: 80px;
+}
+
+/* ══════════════════════
+   GALLERY
+══════════════════════ */
+.asp-gallery-section {
+    position: sticky;
+    top: 90px;
+}
+
+/* Main image */
+.asp-main-image {
+    background: #f5f5f5;
+    overflow: hidden;
+    cursor: zoom-in;
+    margin-bottom: 10px;
+}
+
+.asp-main-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.asp-main-img.asp-img-fade {
+    opacity: 0;
+}
+
+.asp-main-image:hover .asp-main-img {
+    transform: scale(1.05);
+}
+
+/* Thumbnails strip */
+.asp-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.asp-thumb {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #e0e0e0;
+    background: #f5f5f5;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+    transition: border-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.asp-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 6px;
+}
+
+.asp-thumb:hover {
+    border-color: #888;
+}
+
+.asp-thumb--active {
+    border: 2px solid #c9a96e !important;
+}
+
+/* ══════════════════════
+   PRODUCT INFO
+══════════════════════ */
+.asp-info-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Category label */
+.asp-category-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a96e;
+    margin-bottom: 10px;
+}
+
+/* Product title */
+.asp-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #1a1a1a;
+    margin: 0 0 14px;
+    padding: 0;
+}
+
+/* Star rating */
+.asp-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.asp-rating .star-rating,
+.asp-rating .star-rating::before,
+.asp-rating .star-rating span::before {
+    color: #c9a96e !important;
+    font-size: 14px !important;
+}
+
+.asp-rating-count {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #888;
+}
+
+/* Price */
+.asp-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 16px 0;
+    padding: 16px 0;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.asp-price .woocommerce-Price-amount,
+.asp-price .amount,
+.asp-price bdi {
+    color: #1a1a1a !important;
+}
+
+.asp-price del {
+    color: #aaaaaa !important;
+    font-size: 1rem !important;
+    margin-right: 8px;
+    text-decoration: line-through;
+}
+
+.asp-price ins {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+
+/* Short description */
+.asp-short-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #666666;
+    margin-bottom: 24px;
+}
+
+.asp-short-desc p {
+    margin: 0 0 8px;
+}
+
+/* Stock status */
+.asp-stock {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+}
+
+.asp-stock--in {
+    color: #27ae60;
+    font-weight: 500;
+}
+
+.asp-stock--out {
+    color: #c0392b;
+    font-weight: 500;
+}
+
+.asp-stock--low {
+    background: #fff3e0;
+    color: #e65100;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+}
+
+/* ── Quantity selector ────────────────────────────────────── */
+.asp-qty-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid #dddddd;
+    width: fit-content;
+    margin-bottom: 16px;
+}
+
+.asp-qty-btn {
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: 300;
+    color: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.asp-qty-btn:hover {
+    background: #f5f5f5;
+}
+
+.asp-qty-input {
+    width: 52px !important;
+    height: 36px !important;
+    border: none !important;
+    border-left: 1px solid #dddddd !important;
+    border-right: 1px solid #dddddd !important;
+    text-align: center !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    color: #1a1a1a !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    outline: none;
+}
+
+.asp-qty-input::-webkit-outer-spin-button,
+.asp-qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ── ATC + Wishlist row ───────────────────────────────────── */
+.asp-action-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Add to Cart */
+.asp-atc-btn {
+    flex: 1;
+    padding: 16px 24px !important;
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.15em !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    transition: background 0.25s ease !important;
+    display: block !important;
+}
+
+.asp-atc-btn:hover {
+    background: #333333 !important;
+    color: #ffffff !important;
+}
+
+/* Wishlist circle button */
+.asp-wishlist-btn {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #dddddd;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #1a1a1a;
+    padding: 0;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.asp-wishlist-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.asp-wishlist-btn:hover {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Buy Now */
+.asp-buy-now-btn {
+    width: 100%;
+    padding: 15px 24px;
+    background: transparent;
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: 1px solid #1a1a1a;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+    text-align: center;
+    display: block;
+    margin-bottom: 24px;
+}
+
+.asp-buy-now-btn:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.asp-divider {
+    height: 1px;
+    background: #eeeeee;
+    margin: 20px 0;
+    border: none;
+}
+
+/* ── Reassurance row ──────────────────────────────────────── */
+.asp-reassurance {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px solid #eeeeee;
+    background: #fafafa;
+}
+
+.asp-reassurance-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #666;
+}
+
+.asp-reassurance-item svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: #c9a96e;
+}
+
+/* ── Product meta (SKU, Category, Tags) ───────────────────── */
+.asp-meta {
+    border-top: 1px solid #eeeeee;
+    padding-top: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.asp-meta-row {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #999;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.asp-meta-label {
+    font-weight: 500;
+    color: #666;
+}
+
+.asp-meta-value a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.asp-meta-value a:hover {
+    color: #c9a96e;
+}
+
+/* ── Social share ─────────────────────────────────────────── */
+.asp-share {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.asp-share-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #aaaaaa;
+}
+
+.asp-share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e0e0e0;
+    color: #999;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.asp-share-btn svg {
+    width: 13px;
+    height: 13px;
+}
+
+.asp-share-btn:hover {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* ══════════════════════
+   ACCORDION TABS
+══════════════════════ */
+.asp-tabs-section {
+    border-top: 2px solid #eeeeee;
+    margin-bottom: 72px;
+}
+
+.asp-accordion {
+    border-bottom: 1px solid #eeeeee;
+}
+
+.asp-accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    background: transparent;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    cursor: pointer;
+    text-align: left;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.asp-accordion-trigger--open {
+    color: #1a1a1a;
+    border-bottom-color: #c9a96e;
+}
+
+.asp-accordion-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.asp-accordion-trigger--open .asp-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.asp-accordion-body {
+    overflow: hidden;
+    max-height: 3000px;
+    transition: max-height 0.45s ease;
+}
+
+.asp-accordion-body--closed {
+    max-height: 0 !important;
+}
+
+.asp-accordion-content {
+    padding: 4px 0 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #555;
+}
+
+.asp-accordion-content p {
+    margin: 0 0 12px;
+}
+
+/* Attributes table */
+.asp-attr-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.asp-attr-table th,
+.asp-attr-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f5f5f5;
+    text-align: left;
+}
+
+.asp-attr-table th {
+    font-weight: 600;
+    color: #1a1a1a;
+    width: 180px;
+    background: #fafafa;
+}
+
+.asp-attr-table td {
+    color: #555;
+}
+
+/* ══════════════════════
+   RELATED PRODUCTS
+══════════════════════ */
+.asp-related-section {
+    margin-top: 8px;
+}
+
+.asp-related-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 0 0 8px;
+    padding: 0;
+}
+
+/* Gold underline accent */
+.asp-related-title::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: #c9a96e;
+    margin: 10px auto 32px;
+}
+
+.asp-related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.asp-related-card {
+    text-decoration: none;
+    display: block;
+    overflow: hidden;
+    border: 1px solid #f0f0f0;
+    transition: box-shadow 0.25s ease;
+}
+
+.asp-related-card:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
+}
+
+.asp-related-img-wrap {
+    background: #f5f5f5;
+    overflow: hidden;
+}
+
+.asp-related-img-wrap img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    padding: 16px;
+    transition: transform 0.35s ease;
+}
+
+.asp-related-card:hover .asp-related-img-wrap img {
+    transform: scale(1.05);
+}
+
+.asp-related-info {
+    padding: 12px 14px 14px;
+}
+
+.asp-related-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.asp-related-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+}
+
+.asp-related-price .woocommerce-Price-amount,
+.asp-related-price .amount,
+.asp-related-price bdi {
+    color: #1a1a1a !important;
+}
+
+/* ══════════════════════
+   STICKY ADD TO CART BAR
+══════════════════════ */
+.asp-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background: #ffffff;
+    border-top: 1px solid #e8e8e8;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.07);
+    transform: translateY(100%);
+    transition: transform 0.35s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 40px;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+.asp-sticky-bar.asp-sticky-bar--visible {
+    transform: translateY(0);
+}
+
+.asp-sticky-bar__name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+}
+
+.asp-sticky-bar__price {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.asp-sticky-bar__price .woocommerce-Price-amount,
+.asp-sticky-bar__price bdi {
+    color: #1a1a1a !important;
+}
+
+.asp-sticky-bar__btn {
+    padding: 12px 32px;
+    background: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.asp-sticky-bar__btn:hover {
+    background: #333333;
+}
+
+/* ── Out of stock message ─────────────────────────────────── */
+.asp-out-of-stock-msg {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #666;
+    padding: 20px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    margin-bottom: 24px;
+}
+
+.asp-out-of-stock-msg a {
+    color: #c9a96e;
+    text-decoration: none;
+}
+
+/* ── WooCommerce reviews ──────────────────────────────────── */
+#reviews h2,
+#reviews h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+#reviews .comment-form-rating label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+}
+
+/* ══════════════════════
+   RESPONSIVE
+══════════════════════ */
+
+/* Tablet: 1 column, image top, info below */
+@media (max-width: 992px) {
+    .amira-single-product {
+        padding: 24px 20px 80px;
+    }
+
+    .asp-main-wrapper {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .asp-gallery-section {
+        position: static;
+    }
+
+    .asp-related-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .asp-title {
+        font-size: 2rem;
+    }
+
+    .asp-sticky-bar {
+        padding: 12px 24px;
+    }
+}
+
+/* Mobile: compact, smaller fonts */
+@media (max-width: 576px) {
+    .amira-single-product {
+        padding: 16px 14px 70px;
+    }
+
+    .asp-title {
+        font-size: 1.6rem;
+    }
+
+    .asp-price {
+        font-size: 1.1rem;
+    }
+
+    .asp-thumb {
+        width: 60px;
+        height: 60px;
+    }
+
+    .asp-related-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .asp-related-title {
+        font-size: 1.4rem;
+    }
+
+    .asp-atc-btn {
+        font-size: 10px !important;
+        padding: 14px 16px !important;
+    }
+
+    .asp-sticky-bar {
+        padding: 10px 14px;
+        gap: 12px;
+    }
+
+    .asp-sticky-bar__name {
+        font-size: 0.95rem;
+    }
+
+    .asp-sticky-bar__price {
+        display: none;
+    }
+
+    /* hide price on very small screens */
+
+    .asp-sticky-bar__btn {
+        padding: 11px 20px;
+        font-size: 10px;
+    }
+}
+
+/* ============================================================
    AMIRA SHOP — Product Grid & Cards
    archive-product.php + content-product.php
 ============================================================ */
