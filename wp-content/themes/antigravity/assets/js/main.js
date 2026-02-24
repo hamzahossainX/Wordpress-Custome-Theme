@@ -619,3 +619,283 @@
 
 })();
 
+/* ============================================================
+   AMIRA SHOP PAGE INTERACTIONS
+============================================================ */
+(function () {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // 1. Skeleton Loading removal
+        window.addEventListener('load', function () {
+            const skeletons = document.querySelectorAll('.amira-skeleton');
+            skeletons.forEach(function (el) {
+                el.style.display = 'none';
+            });
+            const actualImages = document.querySelectorAll('.amira-product-image-wrap img');
+            actualImages.forEach(function (img) {
+                if (img.classList.contains('amira-product-img--primary')) {
+                    img.style.opacity = '1';
+                }
+            });
+        });
+
+        // 2. Scroll Reveal
+        const reveals = document.querySelectorAll('.amira-reveal');
+        if (reveals.length > 0 && 'IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (entry, index) {
+                    if (entry.isIntersecting) {
+                        setTimeout(function () {
+                            entry.target.classList.add('visible');
+                        }, index * 80); // Stagger fade in
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: "0px 0px -50px 0px" });
+
+            reveals.forEach(function (el) { revealObserver.observe(el); });
+        } else {
+            reveals.forEach(function (el) { el.classList.add('visible'); });
+        }
+
+        // 3. Back to Top Button
+        const backToTopBtn = document.querySelector('.amira-back-to-top');
+        if (backToTopBtn) {
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 400) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            backToTopBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // 4. Quick View Modal
+        function bindQuickView() {
+            const quickViewBtns = document.querySelectorAll('.amira-quickview-btn');
+            const modal = document.querySelector('.amira-quick-view-modal');
+            const modalClose = document.querySelector('.modal-close');
+            const modalOverlay = document.querySelector('.modal-overlay');
+            const modalBody = document.querySelector('.modal-body');
+
+            if (modal && quickViewBtns.length > 0) {
+                quickViewBtns.forEach(function (btn) {
+                    if (btn.dataset.qvBound) return;
+                    btn.dataset.qvBound = 'true';
+
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        modal.classList.add('active');
+                        if (modalBody) {
+                            modalBody.innerHTML = '<div class="amira-skeleton skeleton-img"></div><div class="amira-skeleton skeleton-text"></div>';
+                            const productId = this.getAttribute('data-product-id');
+
+                            const formData = new FormData();
+                            formData.append('action', 'amira_quick_view');
+                            formData.append('product_id', productId);
+
+                            fetch((window.amiraShop && window.amiraShop.ajaxUrl) ? window.amiraShop.ajaxUrl : '/wp-admin/admin-ajax.php', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(function (res) { return res.json(); })
+                                .then(function (data) {
+                                    if (data.success) {
+                                        modalBody.innerHTML = data.data;
+                                        bindFlyingAnimation();
+                                    } else {
+                                        modalBody.innerHTML = '<p style="text-align:center;padding:40px;">Error loading product.</p>';
+                                    }
+                                })
+                                .catch(function () {
+                                    modalBody.innerHTML = '<p style="text-align:center;padding:40px;">Connection error.</p>';
+                                });
+                        }
+                    });
+                });
+
+                const closeModal = function () { modal.classList.remove('active'); };
+                if (modalClose) modalClose.addEventListener('click', closeModal);
+                if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+                });
+            }
+        }
+        bindQuickView();
+
+        // 5. Add to Cart flying animation
+        function bindFlyingAnimation() {
+            const buttons = document.querySelectorAll('.ajax-atc');
+            buttons.forEach(function (btn) {
+                if (btn.dataset.flyingBound === 'true') return;
+                btn.dataset.flyingBound = 'true';
+
+                btn.addEventListener('click', function (e) {
+                    const cartIcon = document.querySelector('.cart-link');
+                    const productItem = this.closest('.amira-product-item') || this.closest('.amira-qv-wrapper');
+
+                    if (cartIcon && productItem) {
+                        const img = productItem.querySelector('img');
+                        if (img) {
+                            const flyingImg = img.cloneNode(true);
+                            const rect = img.getBoundingClientRect();
+                            flyingImg.style.position = 'fixed';
+                            flyingImg.style.top = rect.top + 'px';
+                            flyingImg.style.left = rect.left + 'px';
+                            flyingImg.style.width = rect.width + 'px';
+                            flyingImg.style.height = rect.height + 'px';
+                            flyingImg.style.zIndex = '99999';
+                            flyingImg.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                            flyingImg.style.borderRadius = '50%';
+                            flyingImg.style.opacity = '0.9';
+                            document.body.appendChild(flyingImg);
+
+                            const cartRect = cartIcon.getBoundingClientRect();
+
+                            setTimeout(function () {
+                                flyingImg.style.top = cartRect.top + 'px';
+                                flyingImg.style.left = cartRect.left + 'px';
+                                flyingImg.style.width = '20px';
+                                flyingImg.style.height = '20px';
+                                flyingImg.style.opacity = '0';
+                            }, 10);
+
+                            setTimeout(function () {
+                                flyingImg.remove();
+                            }, 800);
+                        }
+                    }
+                });
+            });
+        }
+        bindFlyingAnimation();
+
+        // 6. Sort dropdown (AJAX fetch)
+        const sortSelects = document.querySelectorAll('.amira-sort-select, .amira-mobile-sort-select');
+        sortSelects.forEach(function (select) {
+            select.onchange = null;
+            select.removeAttribute('onchange');
+
+            select.addEventListener('change', function (e) {
+                const url = this.value;
+                const grid = document.querySelector('.amira-product-grid');
+                if (grid) {
+                    grid.style.opacity = '0.4';
+                    grid.style.transition = 'opacity 0.3s';
+
+                    fetch(url)
+                        .then(function (res) { return res.text(); })
+                        .then(function (html) {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(html, 'text/html');
+
+                            const newGrid = doc.querySelector('.amira-product-grid');
+                            const newPagination = doc.querySelector('.amira-shop-pagination');
+                            const oldPagination = document.querySelector('.amira-shop-pagination');
+                            const newCount = doc.querySelector('.shop-top-bar-left');
+                            const oldCount = document.querySelector('.shop-top-bar-left');
+
+                            if (newGrid) {
+                                grid.innerHTML = newGrid.innerHTML;
+                                grid.style.opacity = '1';
+
+                                if (newPagination && oldPagination) {
+                                    oldPagination.innerHTML = newPagination.innerHTML;
+                                }
+                                if (newCount && oldCount) {
+                                    oldCount.innerHTML = newCount.innerHTML;
+                                }
+
+                                bindFlyingAnimation();
+                                bindQuickView();
+
+                                const newReveals = grid.querySelectorAll('.amira-reveal');
+                                newReveals.forEach(function (el) { el.classList.add('visible'); });
+                            }
+                            window.history.pushState({}, '', url);
+                            sortSelects.forEach(function (s) { if (s !== select) s.value = url; });
+                        })
+                        .catch(function () {
+                            window.location = url;
+                        });
+                } else {
+                    window.location = url;
+                }
+            });
+        });
+
+        // 7. Recently Viewed (localStorage)
+        function handleRecentlyViewed() {
+            const isSingleProduct = document.body.classList.contains('single-product');
+
+            let currentProductId = null;
+            document.body.classList.forEach(function (cls) {
+                if (cls.indexOf('postid-') === 0) {
+                    currentProductId = cls.replace('postid-', '');
+                }
+            });
+
+            let viewedProducts = JSON.parse(localStorage.getItem('amira_recently_viewed') || '[]');
+
+            if (isSingleProduct && currentProductId) {
+                viewedProducts = viewedProducts.filter(function (id) { return id !== currentProductId; });
+                viewedProducts.unshift(currentProductId);
+                if (viewedProducts.length > 4) {
+                    viewedProducts = viewedProducts.slice(0, 4);
+                }
+                localStorage.setItem('amira_recently_viewed', JSON.stringify(viewedProducts));
+            }
+
+            const isShop = document.querySelector('.shop-page-wrapper');
+            if (isShop && viewedProducts.length > 0) {
+                const wrapper = document.querySelector('.shop-content-wrapper');
+                if (!wrapper) return;
+
+                let rvContainer = document.createElement('div');
+                rvContainer.className = 'amira-recently-viewed amira-reveal visible';
+                rvContainer.style.padding = '80px 0 0';
+                rvContainer.style.textAlign = 'center';
+
+                rvContainer.innerHTML = '<h3 style="margin-bottom:32px;font-family:\'Cormorant Garamond\', serif; font-size:2rem;font-weight:600;color:#1a1a1a;">Recently Viewed</h3><div class="amira-product-grid rv-grid" style="opacity:0.5;transition:opacity 0.3s;min-height:200px;"></div>';
+
+                wrapper.appendChild(rvContainer);
+
+                const rvGrid = rvContainer.querySelector('.rv-grid');
+
+                const formData = new FormData();
+                formData.append('action', 'amira_get_recently_viewed');
+                formData.append('product_ids', JSON.stringify(viewedProducts));
+
+                fetch((window.amiraShop && window.amiraShop.ajaxUrl) ? window.amiraShop.ajaxUrl : '/wp-admin/admin-ajax.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        if (data.success && data.data) {
+                            rvGrid.innerHTML = data.data;
+                            rvGrid.style.opacity = '1';
+                            bindFlyingAnimation();
+                            bindQuickView();
+                        } else {
+                            rvContainer.style.display = 'none';
+                        }
+                    })
+                    .catch(function () {
+                        rvContainer.style.display = 'none';
+                    });
+            }
+        }
+        handleRecentlyViewed();
+
+    });
+})();
+
+

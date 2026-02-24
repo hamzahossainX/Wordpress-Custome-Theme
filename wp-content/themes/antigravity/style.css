@@ -4202,3 +4202,509 @@ header .header-account .dropdown-logout:hover .dashicons {
     z-index: 2;
     pointer-events: none;
 }
+
+
+/* ============================================================
+   AMIRA SHOP — Product Grid & Cards
+   archive-product.php + content-product.php
+============================================================ */
+
+/* ── Shop page wrapper ─────────────────────────────────────── */
+.amira-shop-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+}
+
+/* ── WooCommerce outer container reset ─────────────────────── */
+/* woocommerce_content() wraps everything in .woocommerce */
+.amira-shop-wrapper .woocommerce {
+    width: 100%;
+}
+
+/* ── Grid: applied directly to WC's ul.products ────────────── */
+/* WC outputs: <ul class="products columns-4"> … </ul>         */
+.woocommerce ul.products,
+.woocommerce-page ul.products {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 28px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    float: none !important;
+    clear: both !important;
+}
+
+/* ── Grid cell: li.product ─────────────────────────────────── */
+/* Keep li simple — just a grid cell, no extra flex/height     */
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    clear: none !important;
+    /* Remove default WC min-height, overflow etc */
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    position: static !important;
+}
+
+/* ── .amira-card — the actual card inside each li ──────────── */
+.amira-card {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.amira-card:hover {
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.09);
+}
+
+/* ── Image link ────────────────────────────────────────────── */
+.amira-card__image-link {
+    display: block;
+    overflow: hidden;
+    background: #f5f5f5;
+    flex-shrink: 0;
+    /* No aspect-ratio here — controlled on the img itself */
+}
+
+/* ── Product image ─────────────────────────────────────────── */
+.amira-card__image-link img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    padding: 20px !important;
+    background: #f5f5f5 !important;
+    margin: 0 !important;
+    transition: transform 0.4s ease !important;
+}
+
+.amira-card:hover .amira-card__image-link img {
+    transform: scale(1.04) !important;
+}
+
+/* ── Info area ─────────────────────────────────────────────── */
+.amira-card__info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 14px 14px 0;
+    background: #ffffff;
+}
+
+/* ── Product title ─────────────────────────────────────────── */
+.amira-card__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 6px !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+}
+
+.amira-card__title a {
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease;
+}
+
+.amira-card__title a:hover {
+    color: #c9a96e !important;
+}
+
+/* ── Price ─────────────────────────────────────────────────── */
+.amira-card__price {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    flex-grow: 1;
+    /* pushes button to bottom */
+}
+
+/* Override WC green colour on price */
+.amira-card__price .woocommerce-Price-amount,
+.amira-card__price .amount,
+.amira-card__price bdi {
+    color: #1a1a1a !important;
+}
+
+.amira-card__price del {
+    color: #aaaaaa !important;
+    font-size: 12px !important;
+    margin-right: 4px;
+}
+
+.amira-card__price ins {
+    color: #1a1a1a !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+}
+
+/* ── Add to Cart button ─────────────────────────────────────── */
+/* Slide-up on hover: clipped by .amira-card overflow:hidden   */
+.amira-card__btn {
+    display: block !important;
+    width: 100% !important;
+    padding: 13px 0 !important;
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    /* Slide-up: margin shift instead of transform to avoid layout gap */
+    margin-top: 0 !important;
+    transform: translateY(100%) !important;
+    transition: transform 0.32s ease !important;
+    position: relative !important;
+    bottom: auto !important;
+    box-sizing: border-box !important;
+}
+
+.amira-card:hover .amira-card__btn {
+    transform: translateY(0) !important;
+}
+
+.amira-card__btn:hover {
+    background: #333333 !important;
+    color: #ffffff !important;
+}
+
+/* ── WooCommerce utility resets ─────────────────────────────── */
+/* Hide WC's own add-to-cart button that gets injected alongside ours */
+.amira-card .added_to_cart {
+    display: none !important;
+}
+
+/* ── Sorting / result-count (WC injects these) ──────────────── */
+.amira-shop-wrapper .woocommerce-result-count {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #888;
+    line-height: 1;
+    margin: 0 0 28px;
+    float: none;
+    display: block;
+}
+
+/* ── Sorting dropdown ───────────────────────────────────────── */
+.amira-shop-wrapper .woocommerce-ordering,
+.woocommerce-ordering {
+    float: right !important;
+    margin: 0 0 28px !important;
+}
+
+.amira-shop-wrapper .woocommerce-ordering select,
+.woocommerce-ordering select {
+    /* Remove all browser chrome */
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    /* Minimal border: bottom line only */
+    border: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
+    /* Typography */
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #1a1a1a !important;
+    /* Layout */
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231a1a1a'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0 center !important;
+    padding: 4px 22px 4px 0 !important;
+    cursor: pointer !important;
+}
+
+/* ── Pagination ─────────────────────────────────────────────── */
+/* Broad selectors catch WC output whether inside our wrapper or not */
+.woocommerce-pagination,
+.amira-shop-wrapper .woocommerce-pagination {
+    display: block !important;
+    clear: both !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 60px !important;
+    margin-bottom: 40px !important;
+    padding: 0 !important;
+}
+
+.woocommerce-pagination ul,
+.amira-shop-wrapper .woocommerce-pagination ul {
+    display: inline-flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    justify-content: center !important;
+}
+
+/* Every page number, arrow and dots */
+.woocommerce-pagination ul li a.page-numbers,
+.woocommerce-pagination ul li span.page-numbers,
+.amira-shop-wrapper .woocommerce-pagination ul li a,
+.amira-shop-wrapper .woocommerce-pagination ul li span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #1a1a1a !important;
+    border: 1px solid #dddddd !important;
+    text-decoration: none !important;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+    box-sizing: border-box !important;
+    background: #ffffff !important;
+}
+
+/* Hover state */
+.woocommerce-pagination ul li a.page-numbers:hover,
+.amira-shop-wrapper .woocommerce-pagination ul li a:hover {
+    background: #f5f5f5 !important;
+    border-color: #aaaaaa !important;
+    color: #1a1a1a !important;
+}
+
+/* Current / active page */
+.woocommerce-pagination ul li span.current,
+.amira-shop-wrapper .woocommerce-pagination ul li span.current {
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    border-color: #1a1a1a !important;
+    font-weight: 500 !important;
+}
+
+/* Dots (…) */
+.woocommerce-pagination ul li span.dots {
+    border-color: transparent !important;
+    background: transparent !important;
+    color: #aaaaaa !important;
+    width: 24px !important;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+
+    .woocommerce ul.products,
+    .woocommerce-page ul.products {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 20px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .amira-shop-wrapper {
+        padding: 40px 24px 60px;
+    }
+
+    .woocommerce ul.products,
+    .woocommerce-page ul.products {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+    }
+}
+
+/* Mobile: 2 columns (intentional — 2 looks better for mobile shop) */
+@media (max-width: 576px) {
+    .amira-shop-wrapper {
+        padding: 28px 14px 48px;
+    }
+
+    .woocommerce ul.products,
+    .woocommerce-page ul.products {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .amira-card__image-link img {
+        padding: 12px !important;
+    }
+
+    .amira-card__info {
+        padding: 10px 10px 0;
+    }
+
+    .amira-card__title {
+        font-size: 14px !important;
+    }
+
+    .amira-card__price {
+        font-size: 13px !important;
+    }
+
+    .amira-card__btn {
+        font-size: 9px !important;
+        padding: 11px 0 !important;
+        letter-spacing: 0.1em !important;
+    }
+}
+
+/* ── Skeleton Loading ── */
+.amira-skeleton {
+    background: #f5f5f5;
+    background: linear-gradient(90deg, #f5f5f5 25%, #ececec 50%, #f5f5f5 75%);
+    background-size: 200% 100%;
+    animation: amira-shimmer 1.5s infinite;
+    border-radius: 2px;
+}
+
+@keyframes amira-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-img {
+    width: 100%;
+    height: 320px;
+    margin-bottom: 16px;
+}
+
+.skeleton-text {
+    width: 60%;
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.skeleton-text.short {
+    width: 40%;
+}
+
+/* ── Scroll Reveal ── */
+.amira-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.amira-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Back to Top ── */
+.amira-back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.amira-back-to-top.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.amira-back-to-top:hover {
+    background-color: #c9a96e;
+}
+
+/* ── Quick View Modal ── */
+.amira-quick-view-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.amira-quick-view-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(26, 26, 26, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 800px;
+    min-height: 450px;
+    position: relative;
+    z-index: 1;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    padding: 32px;
+}
+
+.amira-quick-view-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #1a1a1a;
+}
